@@ -23,6 +23,7 @@ public class Menu {
             System.out.println("3. Изменить запись");
             System.out.println("4. Удалить запись");
             System.out.println("0. Выйти");
+
             try {
                 if (choice < 5) {
                     choice = scanner.nextInt();
