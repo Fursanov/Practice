@@ -3,6 +3,7 @@ package org.example;
 import java.sql.*;
 import java.util.Scanner;
 
+@SuppressWarnings("squid:S5786")
 public class Menu {
     private final Scanner scanner;
 
@@ -16,7 +17,7 @@ public class Menu {
     public void displayMenu() {
         int choice = -1;
 
-        while (choice != 0) {
+        while (true) {
             System.out.println("Выберите действие:");
             System.out.println("1. Просмотреть таблицы");
             System.out.println("2. Добавить запись");
@@ -25,11 +26,11 @@ public class Menu {
             System.out.println("0. Выйти");
 
             try {
-                if (choice < 5) {
-                    choice = scanner.nextInt();
-                    func.displayDBObjects(choice);
+                choice = scanner.nextInt();
+                if (choice > 5 || choice < 1) {
+                    break;
                 }
-
+                func.displayDBObjects(choice);
             } catch (NumberFormatException e) {
                 System.out.println("ошибка");
                 displayMenu();

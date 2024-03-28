@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+@SuppressWarnings("squid:S5786")
 public class Functions {
     private final Scanner scanner;
     private final Connection connection;

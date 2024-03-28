@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import static org.example.Functions.printTable;
 import static org.example.Functions.searchTableName;
 
+@SuppressWarnings("squid:S5786")
 public class CRUD {
     private final Connection connection;
     private final Scanner scanner;

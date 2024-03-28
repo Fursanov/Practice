@@ -2,11 +2,12 @@ package org.example;
 
 import java.sql.*;
 
+@SuppressWarnings("squid:S5786")
 public class Main {
 
     static String url = "jdbc:postgresql://localhost:5432/market";
     static String sql_user = "postgres";
-    static String password = "el-psy-kongru";
+    static String password = System.getenv("DATABASE_PASSWORD");
 
     public static void main(String[] args) throws SQLException {
 
