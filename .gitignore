@@ -1,0 +1,29 @@
+# Игнорировать скомпилированные классы и директории
+target/
+
+# Игнорировать созданные файлы IDE
+.idea/
+/idea/
+*.iml
+*.iws
+
+# Игнорировать логи и отчёты тестов
+*.log
+*.log.*
+*.out
+*.class
+
+# Игнорировать файлы конфигурации Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Игнорировать файлы созданные maven-ом
+mvnw
+mvnw.cmd
+.mvn/wrapper/maven-wrapper.jar
+/.idea/
+/pom.xml
