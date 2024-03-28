@@ -1,51 +1,39 @@
 package org.example;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Functions {
     private final Scanner scanner;
     private final Connection connection;
-
     private final CRUD crud;
+    private static final Logger logger = Logger.getLogger(CRUD.class.getName());
 
-    public Functions(Scanner scanner, Connection connection) {
+    public Functions(Scanner scanner, Connection connection) throws SQLException {
         this.scanner = scanner;
         this.connection = connection;
         this.crud = new CRUD(connection, scanner);
     }
 
-    public static Object executeSqlFunction(Connection connection, String functionName, Object... params) throws SQLException {
-
-        // Создание PreparedStatement
-        StringBuilder sql = new StringBuilder("SELECT " + functionName + "(");
-        for (int i = 0; i < params.length; i++) {
-            if (i == 0)
-                sql.append("?");
-            else
-                sql.append(",?");
+    public static List<String> searchTableName(Connection connection, int tableNumber, ResultSet tables) throws SQLException {
+        int currentTableNumber = 1;
+        String tableName = "tableName";
+        String idName = "idName";
+        while (tables.next()) {
+            if (currentTableNumber == tableNumber) {
+                tableName = tables.getString(3);
+                String sql = "SELECT * FROM " + tableName;
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+                idName = resultSet.getMetaData().getColumnName(1);
+                break;
+            }
+            currentTableNumber++;
         }
-        sql.append(")");
-
-        System.out.println(sql);
-        PreparedStatement statement = connection.prepareStatement(sql.toString());
-
-        for (int i = 0; i < params.length; i++) {
-            statement.setObject(i + 1, params[i]);
-        }
-
-        ResultSet resultSet = statement.executeQuery();
-
-        Object result = null;
-        if (resultSet.next()) {
-            result = resultSet.getObject(1);
-        }
-
-        // Закрытие ResultSet и PreparedStatement
-        resultSet.close();
-        statement.close();
-
-        return result;
+        tables.close();
+        return List.of(tableName, idName);
     }
 
     public static void printTable(Connection connection, String tableName) throws SQLException {
@@ -62,7 +50,6 @@ public class Functions {
             System.out.println();
         }
 
-        // Закрытие ResultSet, PreparedStatement
         resultSet.close();
         statement.close();
     }
@@ -110,7 +97,7 @@ public class Functions {
                 crud.deleteRecord(selectedTable);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe("Ошибка: " + e.getMessage());
         }
     }
 }

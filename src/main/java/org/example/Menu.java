@@ -8,7 +8,7 @@ public class Menu {
 
     Functions func;
 
-    public Menu(Connection connection) {
+    public Menu(Connection connection) throws SQLException {
         this.scanner = new Scanner(System.in);
         this.func = new Functions(scanner, connection);
     }

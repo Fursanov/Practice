@@ -2,24 +2,30 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
 
 import static org.example.Functions.printTable;
+import static org.example.Functions.searchTableName;
 
 public class CRUD {
     private final Connection connection;
     private final Scanner scanner;
+    private final DatabaseMetaData metaData;
+    private final ResultSet tables;
+    private static final Logger logger = Logger.getLogger(CRUD.class.getName());
 
-    public CRUD(Connection connection, Scanner scanner) {
+    public CRUD(Connection connection, Scanner scanner) throws SQLException {
         this.connection = connection;
         this.scanner = scanner;
+        this.metaData = connection.getMetaData();
+        this.tables = metaData.getTables(null, "public", "%", new String[]{"TABLE"});
     }
 
     void displayTable(int tableNumber) {
         try {
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet tables = metaData.getTables(null, "public", "%", new String[]{"TABLE", "VIEW"});
-
             int currentTableNumber = 1;
             while (tables.next()) {
                 if (currentTableNumber == tableNumber) {
@@ -32,14 +38,13 @@ public class CRUD {
             }
             tables.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe("Ошибка: " + e.getMessage());
         }
     }
 
     void addRecord(int tableNumber) {
         try {
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet functions = metaData.getFunctions(null, "public", "add%");;
+            ResultSet functions = metaData.getFunctions(null, "public", "add%");
 
             int currentTableNumber = 1;
             String functionName = null;
@@ -108,30 +113,15 @@ public class CRUD {
                 System.out.println("Таблица не найдена.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe("Ошибка: " + e.getMessage());
         }
     }
 
     void updateRecord(int tableNumber) {
         try {
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet tables = metaData.getTables(null, "public", "%", new String[]{"TABLE", "VIEW"});
-
-            int currentTableNumber = 1;
-            String tableName = null;
-            String idName = null;
-            while (tables.next()) {
-                if (currentTableNumber == tableNumber) {
-                    tableName = tables.getString(3);
-                    String sql = "SELECT * FROM " + tableName;
-                    PreparedStatement statement = connection.prepareStatement(sql);
-                    ResultSet resultSet = statement.executeQuery();
-                    idName = resultSet.getMetaData().getColumnName(1);
-                    break;
-                }
-                currentTableNumber++;
-            }
-            tables.close();
+            List<String> Names = searchTableName(connection, tableNumber, tables);
+            String tableName = Names.get(0);
+            String idName = Names.get(1);
 
             if (tableName != null) {
                 System.out.println("Введите идентификатор записи для обновления:");
@@ -142,13 +132,13 @@ public class CRUD {
                 selectStatement.setInt(1, id);
                 ResultSet resultSet = selectStatement.executeQuery();
 
-                ResultSetMetaData rsmd = resultSet.getMetaData();
-                int columnCount = rsmd.getColumnCount();
+                ResultSetMetaData resultMetaSet = resultSet.getMetaData();
+                int columnCount = resultMetaSet.getColumnCount();
 
                 if (resultSet.next()) {
                     System.out.println("Текущие значения записи:");
                     for (int i = 1; i <= columnCount; i++) {
-                        System.out.println(rsmd.getColumnName(i) + ": " + resultSet.getString(i));
+                        System.out.println(resultMetaSet.getColumnName(i) + ": " + resultSet.getString(i));
                     }
 
                     System.out.println("Введите новые значения:");
@@ -157,13 +147,13 @@ public class CRUD {
                         if (i > 2) {
                             updateQuery.append(", ");
                         }
-                        updateQuery.append(rsmd.getColumnName(i)).append(" = ?");
+                        updateQuery.append(resultMetaSet.getColumnName(i)).append(" = ?");
                     }
-                    updateQuery.append(" WHERE " + idName + "= ?");
+                    updateQuery.append(" WHERE ").append(idName).append("= ?");
                     PreparedStatement updateStatement = connection.prepareStatement(updateQuery.toString());
 
                     for (int i = 2; i <= columnCount; i++) {
-                        System.out.print(rsmd.getColumnName(i) + ": ");
+                        System.out.print(resultMetaSet.getColumnName(i) + ": ");
                         String newValue = scanner.next();
                         updateStatement.setString(i - 1, newValue);
                     }
@@ -185,30 +175,15 @@ public class CRUD {
                 System.out.println("Таблица не найдена.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe("Ошибка: " + e.getMessage());
         }
     }
 
     void deleteRecord(int tableNumber) {
         try {
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet tables = metaData.getTables(null, "public", "%", new String[]{"TABLE", "VIEW"});
-
-            int currentTableNumber = 1;
-            String tableName = null;
-            String idName = null;
-            while (tables.next()) {
-                if (currentTableNumber == tableNumber) {
-                    tableName = tables.getString(3);
-                    String sql = "SELECT * FROM " + tableName;
-                    PreparedStatement statement = connection.prepareStatement(sql);
-                    ResultSet resultSet = statement.executeQuery();
-                    idName = resultSet.getMetaData().getColumnName(1);
-                    break;
-                }
-                currentTableNumber++;
-            }
-            tables.close();
+            List<String> Names = searchTableName(connection, tableNumber, tables);
+            String tableName = Names.get(0);
+            String idName = Names.get(1);
 
             if (tableName != null) {
                 System.out.println("Введите идентификатор записи для удаления:");
@@ -230,7 +205,7 @@ public class CRUD {
                 System.out.println("Таблица не найдена.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe("Ошибка: " + e.getMessage());
         }
     }
 
