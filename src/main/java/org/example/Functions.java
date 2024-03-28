@@ -30,15 +30,12 @@ public class Functions {
         System.out.println(sql);
         PreparedStatement statement = connection.prepareStatement(sql.toString());
 
-        // Установка параметров
         for (int i = 0; i < params.length; i++) {
             statement.setObject(i + 1, params[i]);
         }
 
-        // Выполнение запроса
         ResultSet resultSet = statement.executeQuery();
 
-        // Получение результата
         Object result = null;
         if (resultSet.next()) {
             result = resultSet.getObject(1);
