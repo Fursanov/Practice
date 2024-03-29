@@ -1,6 +1,7 @@
 package org.example;
 
 import java.sql.*;
+import java.util.Scanner;
 
 @SuppressWarnings("squid:S5786")
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
 
         Connection connection = DriverManager.getConnection(url, sql_user, password);
 
-        Menu menu = new Menu(connection);
+        Menu menu = new Menu(connection, new Scanner(System.in));
         menu.displayMenu();
 
         connection.close();

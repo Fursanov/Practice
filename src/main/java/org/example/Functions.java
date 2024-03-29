@@ -55,47 +55,52 @@ public class Functions {
         statement.close();
     }
 
-    void displayDBObjects(int mode) {
+    public void displayDBObjects(int mode) {
         try {
             DatabaseMetaData metaData = connection.getMetaData();
 
             ResultSet tables = null;
             ResultSet functions = null;
-            if(mode == 1) {
-                tables = metaData.getTables(null, "public", "%", new String[]{"TABLE", "VIEW"});
-            } else if (mode == 2) {
-                functions = metaData.getFunctions(null, "public", "add%");
-            }else {
-                tables = metaData.getTables(null, "public", "%", new String[]{"TABLE"});
-            }
-            System.out.println("Выберите объект для выполнения действия:");
-            int tableNumber = 1;
-            if(tables != null) {
-                while (tables.next()) {
-                    String tableName = tables.getString(3);
-                    System.out.println(tableNumber + ". " + tableName);
-                    tableNumber++;
+            while (true) {
+                if(mode == 1) {
+                    tables = metaData.getTables(null, "public", "%", new String[]{"TABLE"});
+                } else if (mode == 2) {
+                    functions = metaData.getFunctions(null, "public", "add%");
+                }else {
+                    tables = metaData.getTables(null, "public", "%", new String[]{"TABLE"});
                 }
-                tables.close();
-            }
-            if(functions != null) {
-                while (functions.next()) {
-                    String functionName = functions.getString("FUNCTION_NAME");
-                    System.out.println(tableNumber + ". " + functionName);
-                    tableNumber++;
+                System.out.println("Выберите объект для выполнения действия:");
+                int tableNumber = 1;
+                if(tables != null) {
+                    while (tables.next()) {
+                        String tableName = tables.getString(3);
+                        System.out.println(tableNumber + ". " + tableName);
+                        tableNumber++;
+                    }
+                    tables.close();
                 }
-                functions.close();
-            }
+                if(functions != null) {
+                    while (functions.next()) {
+                        String functionName = functions.getString("FUNCTION_NAME");
+                        System.out.println(tableNumber + ". " + functionName);
+                        tableNumber++;
+                    }
+                    functions.close();
+                }
+                System.out.println("0.Назад");
 
-            int selectedTable = scanner.nextInt();
-            if(mode == 1) {
-                crud.displayTable(selectedTable);
-            } else if(mode == 2){
-                crud.addRecord(selectedTable);
-            } else if(mode == 3){
-                crud.updateRecord(selectedTable);
-            } else if(mode == 4){
-                crud.deleteRecord(selectedTable);
+                int selectedTable = scanner.nextInt();
+                if (selectedTable == 0) {
+                    break;
+                } else if (mode == 1) {
+                    crud.displayTable(selectedTable);
+                } else if (mode == 2) {
+                    crud.addRecord(selectedTable);
+                } else if (mode == 3) {
+                    crud.updateRecord(selectedTable);
+                } else if (mode == 4) {
+                    crud.deleteRecord(selectedTable);
+                }
             }
         } catch (SQLException e) {
             logger.severe("Ошибка: " + e.getMessage());

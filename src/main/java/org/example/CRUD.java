@@ -28,6 +28,7 @@ public class CRUD {
     void displayTable(int tableNumber) {
         try {
             int currentTableNumber = 1;
+            tables.beforeFirst();
             while (tables.next()) {
                 if (currentTableNumber == tableNumber) {
                     String tableName = tables.getString(3);
@@ -37,7 +38,6 @@ public class CRUD {
                 }
                 currentTableNumber++;
             }
-            tables.close();
         } catch (SQLException e) {
             logger.severe("Ошибка: " + e.getMessage());
         }
@@ -46,7 +46,7 @@ public class CRUD {
     void addRecord(int tableNumber) {
         try {
             ResultSet functions = metaData.getFunctions(null, "public", "add%");
-
+            functions.beforeFirst();
             int currentTableNumber = 1;
             String functionName = null;
             while (functions.next()) {
@@ -56,7 +56,6 @@ public class CRUD {
                 }
                 currentTableNumber++;
             }
-            functions.close();
 
             if (functionName != null) {
                 ResultSet columns = metaData.getFunctionColumns(null, "public", functionName, null);
@@ -102,7 +101,6 @@ public class CRUD {
                     } else if (columnType.equalsIgnoreCase("boolean")) {
                         preparedStatement.setBoolean(index, Boolean.parseBoolean(columnValue));
                     }
-
                     index++;
                 }
 

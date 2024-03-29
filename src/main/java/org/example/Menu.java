@@ -6,11 +6,10 @@ import java.util.Scanner;
 @SuppressWarnings("squid:S5786")
 public class Menu {
     private final Scanner scanner;
+    private final Functions func;
 
-    Functions func;
-
-    public Menu(Connection connection) throws SQLException {
-        this.scanner = new Scanner(System.in);
+    public Menu(Connection connection, Scanner scanner) throws SQLException {
+        this.scanner = scanner;
         this.func = new Functions(scanner, connection);
     }
 
