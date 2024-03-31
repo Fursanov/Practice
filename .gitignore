@@ -34,3 +34,5 @@ build/
 /.mvn/
 /lib/
 /.mvn/wrapper/
+/mvnw/
+/mvnw.cmd/
