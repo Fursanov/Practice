@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Main {
 
     static String url = "jdbc:postgresql://localhost:5432/market";
-    static String sql_user = "postgres";
-    static String password = System.getenv("DATABASE_PASSWORD");
+    static String sqlUser = "postgres";
+    static String password = System.getenv("database_password");
 
     public static void main(String[] args) throws SQLException {
 
-        Connection connection = DriverManager.getConnection(url, sql_user, password);
+        Connection connection = DriverManager.getConnection(url, sqlUser, password);
 
         Menu menu = new Menu(connection, new Scanner(System.in));
         menu.displayMenu();
