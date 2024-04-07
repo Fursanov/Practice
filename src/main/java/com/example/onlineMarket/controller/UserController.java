@@ -1,8 +1,9 @@
 package com.example.onlineMarket.controller;
 
-import com.example.onlineMarket.dto.UserDto;
-import com.example.onlineMarket.service.UserService;
+import com.example.onlineMarket.services.UserService;
+import com.example.onlineMarket.entity.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,37 +15,37 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto usersDto) {
-        UserDto savedUser = userService.createUser(usersDto);
+    @PostMapping("new")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        List<UserDto> users = userService.getAllUsers();
+    @PostMapping("update")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        User savedUser = userService.updeteUser(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long userId){
-        UserDto userDto = userService.getUserById(userId);
-        return ResponseEntity.ok(userDto);
+    @GetMapping("get/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long userId){
+        User user = userService.getUserById(userId);
+        return ResponseEntity.ok(user);
     }
-
-    @PutMapping("{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userId,
-                                              @RequestBody UserDto updateUser){
-        UserDto userDto = userService.updateUser(userId, updateUser);
-        return ResponseEntity.ok(userDto);
-    }
-
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete/{id}")
     public  ResponseEntity<String> deleteUser(@PathVariable("id") Long userId){
         userService.deleteUser(userId);
-        return ResponseEntity.ok("User has been deleted");
+        String jsonResponse = "{\"message\": \"data has been deleted\"}";
+        return ResponseEntity.ok(jsonResponse);
     }
 
 }
