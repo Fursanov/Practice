@@ -1,0 +1,27 @@
+<!-- products.component.html -->
+<h2> Order Items List
+  <button (click)="createOrderItem()" class="btn btn-success btn-md" style="margin-right: 10px">Create New Order Item</button>
+</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Quantity</th>
+        <th>Product Id</th>
+        <th>Order Id</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orderItem of orderItems">
+        <td> {{orderItem.orderItemId}}</td>
+        <td> {{orderItem.quantity}}</td>
+        <td> {{orderItem.order.orderId}}</td>
+        <td> {{orderItem.product.productId}}</td>
+        <td style = "text-align: right;">
+          <button (click)="updateOrderItem(orderItem.orderItemId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
+          <button (click)="deleteOrderItem(orderItem.orderItemId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

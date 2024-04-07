@@ -1,0 +1,26 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Create Product Review</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <input type="number" class="form-control" id="rating"
+             [(ngModel)]="productReview.rating" name="rating">
+    </div>
+    <div class="form-group">
+      <label for="reviewText">Review Text</label>
+      <input type="text" class="form-control" id="reviewText"
+             [(ngModel)]="productReview.reviewText" name="reviewText">
+    </div>
+    <div class="form-group">
+      <label for="userId">User Id</label>
+      <input type="number" class="form-control" id="userId"
+             [(ngModel)]="productReview.userId" name="userId">
+    </div>
+    <div class="form-group">
+      <label for="productId">Product Id</label>
+      <input type="number" class="form-control" id="productId"
+             [(ngModel)]="productReview.productId" name="productId">
+    </div>
+    <button class="btn btn-success mt-2" type="submit">Submit</button>
+  </form>
+</div>

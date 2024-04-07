@@ -1,0 +1,25 @@
+<!-- stores.component.html -->
+<h2> Stores List
+  <button (click)="createStore()" class="btn btn-success btn-md" style="margin-right: 10px">Create New Store</button>
+</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let store of stores">
+        <td> {{store.storeId}}</td>
+        <td> {{store.storeName}}</td>
+        <td> {{store.location}}</td>
+        <td style = "text-align: right;">
+          <button (click)="updateStore(store.storeId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
+          <button (click)="deleteStore(store.storeId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

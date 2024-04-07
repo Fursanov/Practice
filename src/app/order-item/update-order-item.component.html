@@ -1,0 +1,21 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Update Order Item</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" id="quantity"
+             [(ngModel)]="orderItem.quantity" name="quantity">
+    </div>
+    <div class="form-group">
+      <label for="orderId">Orders Id</label>
+      <input type="number" class="form-control" id="orderId"
+             [(ngModel)]="orderItem.orderId" name="orderId">
+    </div>
+    <div class="form-group">
+      <label for="productId">Product Id</label>
+      <input type="number" class="form-control" id="productId"
+             [(ngModel)]="orderItem.productId" name="productId">
+    </div>
+    <button class="btn btn-success mt-2" type="submit">Submit</button>
+  </form>
+</div>

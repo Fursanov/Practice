@@ -1,0 +1,11 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Create brand</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="brandName">Name</label>
+      <input type="text" class="form-control" id="brandName"
+             [(ngModel)]="brand.brandName" name="brandName">
+    </div>
+    <button class="btn btn-success mt-2" type="submit">Submit</button>
+  </form>
+</div>
