@@ -1,0 +1,29 @@
+/* users.component.css */
+h2 {
+  color: #007bff; /* Цвет заголовка */
+}
+
+.table {
+  width: 100%; /* Ширина таблицы */
+}
+
+th, td {
+  padding: 8px; /* Внутренний отступ ячеек */
+  text-align: left; /* Выравнивание текста в ячейках */
+}
+
+th {
+  background-color: #f2f2f2; /* Цвет фона заголовка таблицы */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Цвет фона четных строк таблицы */
+}
+
+tr:nth-child(odd) {
+  background-color: #fff; /* Цвет фона нечетных строк таблицы */
+}
+
+tr:hover {
+  background-color: #ddd; /* Цвет фона строки при наведении */
+}

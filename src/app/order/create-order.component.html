@@ -1,0 +1,11 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Create order</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="userId">User Id</label>
+      <input type="number" class="form-control" id="userId"
+             [(ngModel)]="order.userId" name="userId">
+    </div>
+    <button class="btn btn-success mt-2" type="submit">Submit</button>
+  </form>
+</div>
