@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-create-brand',
   templateUrl: './create-brand.component.html',
-  styleUrls: ['./create-brand.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class CreateBrandComponent implements OnInit {
   brand: Brand = new Brand();

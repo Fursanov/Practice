@@ -13,7 +13,7 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) {  }
 
   getProductById(id: number) {
-    return this.httpClient.get<CreateProduct>(`${this.baseUrl}/get/${id}`);
+    return this.httpClient.get<Product>(`${this.baseUrl}/get/${id}`);
   }
 
   getProductsList(): Observable<Product[]>{
@@ -25,7 +25,7 @@ export class ProductsService {
     return this.httpClient.post(`${this.baseUrl}/new`, product);
   }
 
-  updateProduct(id: number, product: CreateProduct): Observable<Object>{
+  updateProduct(id: number, product: Product): Observable<Object>{
     product.productId = id;
     console.log(product);
     return this.httpClient.post(`${this.baseUrl}/update`, product);

@@ -21,8 +21,10 @@ import { CreateOrderItemComponent } from './order-item/create-order-item.compone
 import { ProductReviewComponent } from './product-review/product-review.component';
 import { UpdateProductReviewComponent } from './product-review/update-product-review.component';
 import { CreateProductReviewComponent } from './product-review/create-product-review.component';
+import { ProductStoreComponent } from './store/product-store.component';
 
 const routes: Routes = [
+  {path: "product-store/:id", component: ProductStoreComponent},
   {path: "product-reviews", component: ProductReviewComponent},
   {path: "update-product-review/:id", component: UpdateProductReviewComponent},
   {path: "create-product-review", component: CreateProductReviewComponent},

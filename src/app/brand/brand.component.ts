@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-brands',
   templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.css']
+  styleUrls: ['../styles/list.component.css']
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];

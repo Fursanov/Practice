@@ -13,13 +13,15 @@
     </div>
     <div class="form-group">
       <label for="userId">User Id</label>
-      <input type="number" class="form-control" id="userId"
-             [(ngModel)]="productReview.userId" name="userId">
+      <select class="form-control select-dropdown" id="userId" [(ngModel)]="productReview.userId" name="userId">
+        <option *ngFor="let user of users" [value]="user.userId">{{user.userId}}</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="productId">Product Id</label>
-      <input type="number" class="form-control" id="productId"
-             [(ngModel)]="productReview.productId" name="productId">
+      <select class="form-control select-dropdown" id="productId" [(ngModel)]="productReview.productId" name="productId">
+        <option *ngFor="let product of products" [value]="product.productId">{{product.productId}}</option>
+      </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>
   </form>

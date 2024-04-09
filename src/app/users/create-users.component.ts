@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-users.component.html',
-  styleUrls: ['./create-users.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class CreateUsersComponent implements OnInit {
   user: User = new User();

@@ -26,6 +26,7 @@ import { CreateOrderItemComponent } from './order-item/create-order-item.compone
 import { ProductReviewComponent } from './product-review/product-review.component';
 import { UpdateProductReviewComponent } from './product-review/update-product-review.component';
 import { CreateProductReviewComponent } from './product-review/create-product-review.component';
+import { ProductStoreComponent } from './store/product-store.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { CreateProductReviewComponent } from './product-review/create-product-re
     CreateOrderItemComponent,
     ProductReviewComponent,
     UpdateProductReviewComponent,
-    CreateProductReviewComponent
+    CreateProductReviewComponent,
+    ProductStoreComponent
   ],
   imports: [
     BrowserModule,

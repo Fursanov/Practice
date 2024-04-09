@@ -6,7 +6,7 @@ import { StoresService } from "../service/store.service";
 @Component({
   selector: 'app-update-store',
   templateUrl: './update-store.component.html',
-  styleUrls: ['./update-store.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class UpdateStoreComponent implements OnInit {
   store: Store = new Store();

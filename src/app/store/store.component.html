@@ -17,9 +17,11 @@
         <td> {{store.storeName}}</td>
         <td> {{store.location}}</td>
         <td style = "text-align: right;">
+          <button (click)="showProducts(store.storeId)" class="btn btn-info btn-md" style="margin-left: 5px">Products</button>
           <button (click)="updateStore(store.storeId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
           <button (click)="deleteStore(store.storeId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
+

@@ -1,5 +1,6 @@
 export class Brand {
   brandId!: number;
+  brandName!: string;
 }
 
 export class Store {

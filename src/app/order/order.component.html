@@ -9,7 +9,7 @@
         <th>Order Date</th>
         <th>Total Amount</th>
         <th>Order Status</th>
-        <th>User Id</th>
+        <th>User</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
@@ -19,7 +19,7 @@
         <td> {{order.orderDate}}</td>
         <td> {{order.totalAmount}}</td>
         <td> {{order.orderStatus}}</td>
-        <td> {{order.user.userId}}</td>
+        <td> {{order.user.email}}</td>
         <td style = "text-align: right;">
           <button (click)="updateOrder(order.orderId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
           <button (click)="deleteOrder(order.orderId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>

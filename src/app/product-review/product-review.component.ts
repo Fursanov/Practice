@@ -7,7 +7,7 @@ import {ProductReview} from "../models/product-review";
 @Component({
   selector: 'app-product-reviews',
   templateUrl: './product-review.component.html',
-  styleUrls: ['./product-review.component.css']
+  styleUrls: ['../styles/list.component.css']
 })
 export class ProductReviewComponent implements OnInit {
   productReviews: ProductReview[] = [];

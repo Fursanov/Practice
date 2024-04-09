@@ -6,7 +6,7 @@ import { UsersService } from "../service/users.service";
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-users.component.html',
-  styleUrls: ['./update-users.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class UpdateUserComponent implements OnInit {
   user: User = new User();

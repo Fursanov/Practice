@@ -9,8 +9,8 @@
         <th>Rating</th>
         <th>Review Text</th>
         <th>Review Date</th>
-        <th>User Id</th>
-        <th>Product Id</th>
+        <th>User </th>
+        <th>Product Name</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
@@ -20,8 +20,8 @@
         <td> {{productReview.rating}}</td>
         <td> {{productReview.reviewText}}</td>
         <td> {{productReview.reviewDate}}</td>
-        <td> {{productReview.user.userId}}</td>
-        <td> {{productReview.product.productId}}</td>
+        <td> {{productReview.user.userName}}</td>
+        <td> {{productReview.product.name}}</td>
         <td style = "text-align: right;">
           <button (click)="updateProductReview(productReview.productReviewId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
           <button (click)="deleteProductReview(productReview.productReviewId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>

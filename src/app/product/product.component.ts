@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-products',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['../styles/list.component.css']
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];

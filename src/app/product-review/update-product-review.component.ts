@@ -1,28 +1,61 @@
 import { Component, OnInit } from "@angular/core";
-import { CreateProductReview } from "../models/create-product-review";
+import {Product, ProductReview, User } from "../models/product-review";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProductReviewService } from "../service/product-review.service";
+import { UsersService } from "../service/users.service";
+import { ProductsService } from "../service/product.service";
 
 @Component({
   selector: 'app-update-product-review',
   templateUrl: './update-product-review.component.html',
-  styleUrls: ['./update-product-review.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class UpdateProductReviewComponent implements OnInit {
-  productReview: CreateProductReview = new CreateProductReview();
+  productReview: ProductReview = new ProductReview();
   id!: number;
+  users: any[] = [];
+  products: any[] =[];
 
   constructor(private productReviewService: ProductReviewService,
+              private userService: UsersService,
+              private productService: ProductsService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+    this.productReview.product = new Product();
+    this.productReview.user = new User();
+  }
 
   ngOnInit(): void {
+    this.loadUsers();
+    this.loadProducts();
     this.id = this.route.snapshot.params['id']
     this.productReviewService.getProductReviewById(this.id).subscribe(
       data => {
         this.productReview = data;
       },
       error => console.log(error)
+    );
+  }
+
+  loadUsers() {
+    this.userService.getUsersList().subscribe(
+      data => {
+        this.users = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  loadProducts() {
+    this.productService.getProductsList().subscribe(
+      data => {
+        this.products = data;
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
 

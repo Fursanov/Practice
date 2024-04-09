@@ -9,11 +9,11 @@ import { CreateProductReview } from "../models/create-product-review";
 })
 export class ProductReviewService {
 
-  private baseUrl = "http://localhost:8080/api/product-reviews"
+  private baseUrl = "http://localhost:8080/api/productReviews"
   constructor(private httpClient: HttpClient) {  }
 
   getProductReviewById(id: number) {
-    return this.httpClient.get<CreateProductReview>(`${this.baseUrl}/get/${id}`);
+    return this.httpClient.get<ProductReview>(`${this.baseUrl}/get/${id}`);
   }
 
   getProductReviewList(): Observable<ProductReview[]>{
@@ -25,7 +25,7 @@ export class ProductReviewService {
     return this.httpClient.post(`${this.baseUrl}/new`, productReview);
   }
 
-  updateProductReview(id: number, productReview: CreateProductReview): Observable<Object>{
+  updateProductReview(id: number, productReview: ProductReview): Observable<Object>{
     productReview.productReviewId = id;
     console.log(productReview);
     return this.httpClient.post(`${this.baseUrl}/update`, productReview);

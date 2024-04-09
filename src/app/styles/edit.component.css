@@ -1,0 +1,111 @@
+/* styles.css */
+
+/* Обертка для формы */
+.col-md-6.offset-md-3 {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок формы */
+h3 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+/* Стили для формы */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Стили для полей ввода */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+/* Стили для полей ввода */
+input[type="number"],
+input[type="text"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Стили для кнопки отправки формы */
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Стили для выпадающего списка */
+.select-dropdown {
+  width: 100%; /* Ширина списка равна ширине родительского контейнера */
+  padding: 0.375rem 1.75rem 0.375rem 0.75rem; /* Отступы внутри списка */
+  font-size: 1rem; /* Размер шрифта */
+  line-height: 1.5; /* Межстрочный интервал */
+  color: #495057; /* Цвет текста */
+  background-color: #fff; /* Цвет фона */
+  background-clip: padding-box; /* Заполняем только внутреннюю часть элемента */
+  border: 1px solid #ced4da; /* Граница */
+  border-radius: 0.25rem; /* Радиус скругления углов */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Плавное изменение цвета границы и тени */
+}
+
+/* Стили для активного состояния выпадающего списка */
+.select-dropdown:focus {
+  border-color: #80bdff; /* Цвет границы при активации */
+  outline: 0; /* Убираем стандартный фокусный контур */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Тень при активации */
+}
+
+/* Стили для стрелки выпадающего списка */
+.select-arrow {
+  position: absolute; /* Абсолютное позиционирование */
+  top: 50%; /* Положение по вертикали */
+  right: 0.75rem; /* Отступ справа */
+  transform: translateY(-50%); /* Смещение вверх на 50% высоты */
+  pointer-events: none; /* Отключаем события мыши */
+}
+
+/* Стили для опций выпадающего списка */
+.select-option {
+  padding: 0.375rem 1.75rem; /* Отступы внутри опций */
+  font-size: 1rem; /* Размер шрифта */
+  line-height: 1.5; /* Межстрочный интервал */
+  color: #495057; /* Цвет текста */
+  background-color: #fff; /* Цвет фона */
+  transition: background-color 0.15s ease-in-out; /* Плавное изменение цвета фона */
+}
+
+/* Стили для выделенной опции */
+.select-option:hover,
+.select-option:focus {
+  background-color: #e9ecef; /* Цвет фона при наведении или фокусировке */
+}

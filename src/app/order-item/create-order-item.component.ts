@@ -2,19 +2,51 @@ import { Component, OnInit } from "@angular/core";
 import { CreateOrderItem } from "../models/create-order-item";
 import { OrderItemsService } from "../service/order-item.service";
 import { Router } from "@angular/router";
+import { OrdersService } from "../service/order.service";
+import { ProductsService } from "../service/product.service";
 
 @Component({
   selector: 'app-create-order-item',
   templateUrl: './create-order-item.component.html',
-  styleUrls: ['./create-order-item.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class CreateOrderItemComponent implements OnInit {
   orderItem: CreateOrderItem = new CreateOrderItem();
   ordersId!: string;
+  orders: any[] = [];
+  products: any[] =[];
+  
   constructor(private orderItemsService: OrderItemsService,
+              private orderService: OrdersService,
+              private productService: ProductsService,
               private router: Router) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loadOrders();
+    this.loadProducts();
+  }
+
+  loadOrders() {
+    this.orderService.getOrdersList().subscribe(
+      data => {
+        this.orders = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  loadProducts() {
+    this.productService.getProductsList().subscribe(
+      data => {
+        this.products = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
   saveOrderItem() {
     this.orderItemsService.createOrderItem(this.orderItem).subscribe(

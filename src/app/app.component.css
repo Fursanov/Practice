@@ -1,0 +1,46 @@
+/* Стили для навигационного меню */
+.navbar {
+  background-color: #007bff; /* Цвет фона */
+  border-radius: 5px; /* Закругленные углы */
+  padding: 10px 0; /* Внутренние отступы по верху и низу */
+}
+
+.navbar-nav {
+  display: flex; /* Отображение в виде горизонтального flex-контейнера */
+  justify-content: space-between; /* Распределение элементов на равном расстоянии по ширине */
+  align-items: center; /* Выравнивание по вертикали по центру */
+}
+
+.navbar-nav .nav-item {
+  margin-right: 15px; /* Отступ между элементами */
+}
+
+.navbar-nav .nav-link {
+  color: #fff; /* Цвет текста */
+  font-weight: bold; /* Жирный шрифт */
+  transition: color 0.3s ease; /* Плавное изменение цвета текста при наведении */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f8f9fa; /* Цвет текста при наведении */
+}
+
+.navbar-nav .active {
+  color: #f8f9fa; /* Цвет активной ссылки */
+}
+
+/* Стили для контейнера */
+.container {
+  margin-top: 20px; /* Отступ сверху */
+  border: 1px solid #007bff; /* Рамка */
+  border-radius: 5px; /* Закругленные углы */
+  padding: 20px; /* Внутренние отступы */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+/* Стили для активной ссылки */
+.nav-link.active {
+  background-color: #0056b3; /* Цвет фона */
+  border-radius: 3px; /* Закругленные углы */
+  padding: 8px 15px; /* Внутренние отступы */
+}

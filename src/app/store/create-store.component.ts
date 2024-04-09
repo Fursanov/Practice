@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-create-store',
   templateUrl: './create-store.component.html',
-  styleUrls: ['./create-store.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class CreateStoreComponent implements OnInit {
   store: Store = new Store();

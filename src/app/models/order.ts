@@ -1,6 +1,7 @@
 
 export class User {
   userId!: number;
+  email!: string;
 }
 
 export class Order   {

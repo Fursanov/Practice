@@ -6,7 +6,7 @@ import { BrandsService } from "../service/brand.service";
 @Component({
   selector: 'app-update-brand',
   templateUrl: './update-brand.component.html',
-  styleUrls: ['./update-brand.component.css']
+  styleUrls: ['../styles/edit.component.css']
 })
 export class UpdateBrandComponent implements OnInit {
   brand: Brand = new Brand();

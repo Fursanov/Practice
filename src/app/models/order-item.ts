@@ -4,6 +4,7 @@ export class Order{
 
 export class Product{
   productId!: number;
+  name!: string;
 }
 export class OrderItem {
   orderItemId!: number;

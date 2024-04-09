@@ -13,7 +13,7 @@ export class OrderItemsService {
   constructor(private httpClient: HttpClient) {  }
 
   getOrderItemById(id: number) {
-    return this.httpClient.get<CreateOrderItem>(`${this.baseUrl}/get/${id}`);
+    return this.httpClient.get<OrderItem>(`${this.baseUrl}/get/${id}`);
   }
 
   getOrderItemsList(): Observable<OrderItem[]>{
@@ -25,7 +25,7 @@ export class OrderItemsService {
     return this.httpClient.post(`${this.baseUrl}/new`, orderItem);
   }
 
-  updateOrderItem(id: number, orderItem: CreateOrderItem): Observable<Object>{
+  updateOrderItem(id: number, orderItem: OrderItem): Observable<Object>{
     orderItem.orderItemId = id;
     console.log(orderItem);
     return this.httpClient.post(`${this.baseUrl}/update`, orderItem);

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-orders',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  styleUrls: ['../styles/list.component.css']
 })
 export class OrderComponent implements OnInit {
   orders: Order[] = [];

@@ -1,0 +1,28 @@
+<!-- stores.component.html -->
+<h2> Product List
+  <div class="form-group">
+    <label for="productId">Product Id</label>
+    <select class="form-control select-dropdown" id="productId" [(ngModel)]="newProduct" name="productId">
+      <option *ngFor="let product of addProducts" [ngValue]="product">{{product.productId}}</option>
+    </select>
+  </div>
+  <button (click)="addProduct()" class="btn btn-success btn-md" style="margin-right: 10px">Add Product</button>
+</h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th style="text-align: right;">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of store.products">
+    <td> {{product.productId}}</td>
+    <td style = "text-align: right;">
+      <button (click)="deleteProduct(product)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<button (click)="back()" class="btn btn-danger btn-md" style="margin-left: 5px">Back</button>

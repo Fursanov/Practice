@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-stores',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+  styleUrls: ['../styles/list.component.css']
 })
 export class StoreComponent implements OnInit {
   stores: Store[] = [];
@@ -27,6 +27,10 @@ export class StoreComponent implements OnInit {
 
   updateStore(id: number) {
     this.router.navigate(['update-store', id]);
+  }
+
+  showProducts(id: number){
+    this.router.navigate(['product-store', id]);
   }
 
   createStore() {
