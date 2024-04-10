@@ -8,7 +8,7 @@ function ProductForm() {
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        price: 0,
+        price: 0.0,
         stockQuantity: 0,
         brandId: 0,
         storesId: []
@@ -80,18 +80,21 @@ function ProductForm() {
                     />
                     <label className="form-label" htmlFor="price">Цена:</label>
                     <input
-                        type="number"
+                        type="number"  min="0.1" step="0.1"
+						onkeydown="return event.key !== '-';"
                         id="price"
                         value={formData.price}
-                        onChange={handleChangeNum}
+                        onChange={handleChange}
                         className="form-input"
                     />
                     <label className="form-label" htmlFor="stockQuantity">Стоковое количество:</label>
                     <input
                         type="number"
                         id="stockQuantity"
+						type="number" min="1"
+						onkeydown="return event.key !== '-';"
                         value={formData.stockQuantity}
-                        onChange={handleChangeNum}
+                        onChange={handleChange}
                         className="form-input"
                     />
                     <label className="form-label" htmlFor="brand">Бренд:</label>

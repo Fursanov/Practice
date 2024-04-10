@@ -79,7 +79,8 @@ function ProductUpdate() {
                 <label className="form-label" htmlFor="price">Цена:</label>
                 <input
                     type="number"
-                    name="price"
+                    name="price" min="0.1" step="0.1"
+                    onkeydown="return event.key !== '-';"
                     value={updatedProduct.price}
                     onChange={handleInputChange}
                     className="form-input"
@@ -87,7 +88,8 @@ function ProductUpdate() {
                 <label className="form-label" htmlFor="stockQuantity">Стоковое количество:</label>
                 <input
                     type="number"
-                    name="stockQuantity"
+                    name="stockQuantity" min="1"
+                    onkeydown="return event.key !== '-';"
                     value={updatedProduct.stockQuantity}
                     onChange={handleInputChange}
                     className="form-input"
