@@ -1,21 +1,21 @@
 package org.example;
 
-import java.sql.*;
-import java.util.Scanner;
+import org.example.controllers.MainController;
 
-@SuppressWarnings("squid:S5786")
+import java.sql.*;
+
 public class Main {
 
     static String url = "jdbc:postgresql://localhost:5432/market";
-    static String sqlUser = "postgres";
-    static String password = System.getenv("database_password");
+    static String sql_user = "postgres";
+    static String password = "el-psy-kongru";
 
     public static void main(String[] args) throws SQLException {
 
-        Connection connection = DriverManager.getConnection(url, sqlUser, password);
+        Connection connection = DriverManager.getConnection(url, sql_user, password);
 
-        Menu menu = new Menu(connection, new Scanner(System.in));
-        menu.displayMenu();
+        MainController controller = new MainController(connection);
+        controller.displayMenu();
 
         connection.close();
 
