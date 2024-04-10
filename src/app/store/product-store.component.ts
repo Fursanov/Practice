@@ -8,7 +8,7 @@ import { ProductsService } from '../service/product.service';
 @Component({
   selector: 'app-product-store',
   templateUrl: './product-store.component.html',
-  styleUrls: ['../styles/list.component.css']
+  styleUrls: ['../styles/list.component.css', '../styles/edit.component.css']
 })
 export class ProductStoreComponent implements OnInit {
   addProducts: any[] = [];
@@ -19,7 +19,7 @@ export class ProductStoreComponent implements OnInit {
   constructor(private storesService: StoresService,
               private productsService: ProductsService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) { this.store.products = [] }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -33,15 +33,18 @@ export class ProductStoreComponent implements OnInit {
         this.addProducts = data;
       },
     );
+
+    console.log(this.addProducts);
   }
 
   addProduct(): void {
     this.store.products.push(this.newProduct);
-    console.log(this.store);
     this.storesService.updateStore(this.id, this.store).subscribe(
-      data => {
-      },
-      error => console.log(error)
+      (data) => { },
+      (error) => {
+        console.log(error);
+        this.store.products.splice(this.store.products.indexOf(this.newProduct), 1);
+      }
     );
   }
 
@@ -56,5 +59,9 @@ export class ProductStoreComponent implements OnInit {
 
   back() {
     this.router.navigate(['/stores']);
+  }
+
+  isProductInStore(productId:number): boolean{
+    return this.store.products.some(p => p.productId == productId);
   }
 }

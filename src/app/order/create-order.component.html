@@ -2,9 +2,9 @@
   <h3>Create order</h3>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="userId">User Id</label>
+      <label for="userId">User</label>
       <select class="form-control select-dropdown" id="userId" [(ngModel)]="order.userId" name="userId">
-        <option *ngFor="let user of users" [value]="user.userId">{{user.userId}}</option>
+        <option *ngFor="let user of users" [value]="user.userId">{{user.email}}</option>
       </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>

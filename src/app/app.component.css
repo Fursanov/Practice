@@ -26,7 +26,7 @@
 }
 
 .navbar-nav .active {
-  color: #f8f9fa; /* Цвет активной ссылки */
+  color: #eba46b; /* Цвет активной ссылки */
 }
 
 /* Стили для контейнера */
@@ -38,9 +38,4 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Тень */
 }
 
-/* Стили для активной ссылки */
-.nav-link.active {
-  background-color: #0056b3; /* Цвет фона */
-  border-radius: 3px; /* Закругленные углы */
-  padding: 8px 15px; /* Внутренние отступы */
-}
+

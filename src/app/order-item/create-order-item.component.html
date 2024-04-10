@@ -7,15 +7,15 @@
              [(ngModel)]="orderItem.quantity" name="quantity">
     </div>
     <div class="form-group">
-      <label for="orderId">Order Id</label>
+      <label for="orderId">Order from</label>
       <select class="form-control select-dropdown" id="orderId" [(ngModel)]="orderItem.orderId" name="orderId">
-        <option *ngFor="let order of orders" [value]="order.orderId">{{order.orderId}}</option>
+        <option *ngFor="let order of orders" [value]="order.orderId">{{order.user.userName}}({{order.orderDate}})</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="productId">Product Id</label>
+      <label for="productId">Product</label>
       <select class="form-control select-dropdown" id="productId" [(ngModel)]="orderItem.productId" name="productId">
-        <option *ngFor="let product of products" [value]="product.productId">{{product.productId}}</option>
+        <option *ngFor="let product of products" [value]="product.productId">{{product.name}}({{product.brand.brandName}})</option>
       </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>

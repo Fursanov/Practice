@@ -5,19 +5,17 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Id</th>
         <th>Quantity</th>
-        <th>Order Id</th>
+        <th>Order from</th>
         <th>Product Name</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let orderItem of orderItems">
-        <td> {{orderItem.orderItemId}}</td>
         <td> {{orderItem.quantity}}</td>
-        <td> {{orderItem.order.orderId}}</td>
-        <td> {{orderItem.product.name}}</td>
+        <td> {{orderItem.order.user.userName}}({{orderItem.order.orderDate}})</td>
+        <td> {{orderItem.product.name}}({{orderItem.product.brand.brandName}})</td>
         <td style = "text-align: right;">
           <button (click)="updateOrderItem(orderItem.orderItemId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
           <button (click)="deleteOrderItem(orderItem.orderItemId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>

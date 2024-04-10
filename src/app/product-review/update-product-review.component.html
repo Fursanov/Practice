@@ -17,15 +17,15 @@
              [(ngModel)]="productReview.reviewDate" name="reviewDate">
     </div>
     <div class="form-group">
-      <label for="userId">User Id</label>
+      <label for="userId">User</label>
       <select class="form-control select-dropdown" id="userId" [(ngModel)]="productReview.user" name="userId">
-        <option *ngFor="let user of users" [ngValue]="user">{{user.userId}}</option>
+        <option *ngFor="let user of users" [ngValue]="user">{{user.email}}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="productId">Product Id</label>
+      <label for="productId">Product</label>
       <select class="form-control select-dropdown" id="productId" [(ngModel)]="productReview.product" name="productId">
-        <option *ngFor="let product of products" [ngValue]="product">{{product.productId}}</option>
+        <option *ngFor="let product of products" [ngValue]="product"> {{product.name}}({{product.brand.brandName}})</option>
       </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>

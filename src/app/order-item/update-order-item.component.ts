@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {Order, OrderItem, Product } from "../models/order-item";
+import {Order, OrderItem } from "../models/order-item";
 import { ActivatedRoute, Router } from "@angular/router";
 import { OrderItemsService } from "../service/order-item.service";
 import { OrdersService } from "../service/order.service";
@@ -22,7 +22,7 @@ export class UpdateOrderItemComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.orderItem.order = new Order();
-    this.orderItem.product = new Product();}
+  }
 
   ngOnInit(): void {
     this.loadOrders();

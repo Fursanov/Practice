@@ -5,7 +5,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Email</th>
         <th>Password hash</th>
@@ -15,7 +14,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td> {{user.userId}}</td>
         <td> {{user.userName}}</td>
         <td> {{user.email}}</td>
         <td> {{user.passwordHash}}</td>

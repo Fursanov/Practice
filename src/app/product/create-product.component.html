@@ -22,9 +22,9 @@
              [(ngModel)]="product.stockQuantity" name="stockQuantity">
     </div>
     <div class="form-group">
-      <label for="brandId">Brand Id</label>
+      <label for="brandId">Brand</label>
       <select class="form-control select-dropdown" id="brandId" [(ngModel)]="product.brandId" name="brandId">
-        <option *ngFor="let brand of brands" [value]="brand.brandId">{{brand.brandId}}</option>
+        <option *ngFor="let brand of brands" [value]="brand.brandId">{{brand.brandName}}</option>
       </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>

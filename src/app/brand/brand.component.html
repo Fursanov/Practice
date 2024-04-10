@@ -5,14 +5,12 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Id</th>
         <th>Name</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let brand of brands">
-        <td> {{brand.brandId}}</td>
         <td> {{brand.brandName}}</td>
         <td style = "text-align: right;">
           <button (click)="updateBrand(brand.brandId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>

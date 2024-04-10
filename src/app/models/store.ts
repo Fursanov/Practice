@@ -1,5 +1,9 @@
-export class Product {
+import { Brand } from "./brand";
+
+export class Product{
   productId!: number;
+  name!: string;
+  brand!: Brand;
 }
 export class Store {
   storeId!: number;
