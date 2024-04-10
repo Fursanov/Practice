@@ -2,7 +2,6 @@ package com.example.onlineMarket.controller;
 
 import com.example.onlineMarket.services.StoreService;
 import com.example.onlineMarket.entity.Store;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/stores")
 public class StoreController {
 
+    private final StoreService storeService;
+
     @Autowired
-    private StoreService storeService;
+    public StoreController(StoreService storeService) {
+        this.storeService = storeService;
+    }
 
     @PostMapping("new")
     public ResponseEntity<Store> createStore(@RequestBody Store store) {
@@ -26,7 +28,7 @@ public class StoreController {
 
     @PostMapping("update")
     public ResponseEntity<Store> updateStore(@RequestBody Store store) {
-        Store savedStore = storeService.updeteStore(store);
+        Store savedStore = storeService.updateStore(store);
         return new ResponseEntity<>(savedStore, HttpStatus.CREATED);
     }
 

@@ -2,7 +2,6 @@ package com.example.onlineMarket.controller;
 
 import com.example.onlineMarket.services.UserService;
 import com.example.onlineMarket.entity.User;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("new")
     public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -26,7 +28,7 @@ public class UserController {
 
     @PostMapping("update")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        User savedUser = userService.updeteUser(user);
+        User savedUser = userService.updateUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

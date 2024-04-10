@@ -2,34 +2,39 @@ package com.example.onlineMarket.services;
 
 import com.example.onlineMarket.entity.*;
 import com.example.onlineMarket.exception.ResourceNotFoundException;
+import com.example.onlineMarket.models.CreateProductModel;
 import com.example.onlineMarket.models.ProductModel;
 import com.example.onlineMarket.repository.ProductRepository;
 import com.example.onlineMarket.repository.BrandRepository;
 import com.example.onlineMarket.repository.StoreRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductService {
 
-    @Autowired
-    ProductRepository productRepository;
-    @Autowired
-    BrandRepository brandRepository;
-    @Autowired
-    StoreRepository storeRepository;
+    private final ProductRepository productRepository;
+    private final BrandRepository brandRepository;
+    private final StoreRepository storeRepository;
+    static final String resourceNotFoundException = "Products is not exists with the given id: ";
 
-    public Product createProduct(ProductModel productModel){
+    @Autowired
+    public ProductService(
+            ProductRepository productRepository,
+            BrandRepository brandRepository,
+            StoreRepository storeRepository
+    ) {
+        this.productRepository = productRepository;
+        this.brandRepository = brandRepository;
+        this.storeRepository = storeRepository;
+    }
+
+    public Product createProduct(CreateProductModel productModel){
 
         Brand brand = brandRepository.findById(productModel.getBrandId()).orElseThrow(
-                () -> new ResourceNotFoundException("Products is not exists with the given id: " + productModel.getBrandId())
+                () -> new ResourceNotFoundException(resourceNotFoundException + productModel.getBrandId())
         );
         List<Store> stores = storeRepository.findAllById(productModel.getStoresId());
         Product product = new Product(
@@ -48,7 +53,7 @@ public class ProductService {
 
     public Product getProductById(Long productId) {
         return productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Products is not exists with the given id: " + productId)
+                () -> new ResourceNotFoundException(resourceNotFoundException + productId)
         );
     }
 
@@ -56,33 +61,30 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product deleteProduct(Long productId){
-        Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Products is not exists with the given id: " + productId)
+    public void deleteProduct(Long productId){
+        productRepository.findById(productId).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + productId)
         );
         productRepository.deleteById(productId);
-        return product;
     }
 
-    public Product updeteProduct(
-            Long productId, Long brandId, Set<Long> storesId,
-            String name, String description, double price, int quantity) {
-        Brand brand = brandRepository.findById(brandId).orElseThrow(
-                () -> new ResourceNotFoundException("Products is not exists with the given id: " + brandId)
+    public Product updateProduct(ProductModel newProduct) {
+        Brand brand = brandRepository.findById(newProduct.getBrand().getBrandId()).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + newProduct.getBrand().getBrandId())
         );
         List<Store> stores = null;
-        if(storesId != null) {
-            stores = storeRepository.findAllById(storesId);
+        if(newProduct.getStoresId() != null) {
+            stores = storeRepository.findAllById(newProduct.getStoresId());
         }
-        Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Products is not exists with the given id: " + productId)
+        Product oldProduct = productRepository.findById(newProduct.getProductId()).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + newProduct.getProductId())
         );
-        product.setBrand(brand);
-        product.setStores(stores);
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(price);
-        product.setStockQuantity(quantity);
-        return productRepository.save(product);
+        oldProduct.setBrand(brand);
+        oldProduct.setStores(stores);
+        oldProduct.setName(newProduct.getName());
+        oldProduct.setDescription(newProduct.getDescription());
+        oldProduct.setPrice(newProduct.getPrice());
+        oldProduct.setStockQuantity(newProduct.getStockQuantity());
+        return productRepository.save(oldProduct);
     }
 }

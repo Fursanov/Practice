@@ -1,12 +1,9 @@
 package com.example.onlineMarket.controller;
 
-import com.example.onlineMarket.entity.Brand;
 import com.example.onlineMarket.models.OrderModel;
 import com.example.onlineMarket.models.UpdateOrderModel;
 import com.example.onlineMarket.services.OrderService;
 import com.example.onlineMarket.entity.Order;
-import lombok.AllArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
 
+    private final OrderService orderService;
+
     @Autowired
-    private OrderService orderService;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @PostMapping("new")
     public ResponseEntity<Order> createOrder(@RequestBody OrderModel orderModel) {
@@ -30,7 +30,7 @@ public class OrderController {
 
     @PostMapping("update")
     public ResponseEntity<Order> updateOrder(@RequestBody UpdateOrderModel orderModel) {
-        Order savedOrder = orderService.updeteOrder(orderModel.getUser().getUserId(), orderModel.getOrderDate(), orderModel.getTotalAmount(), orderModel.getOrderStatus(), orderModel.getOrderId());
+        Order savedOrder = orderService.updateOrder(orderModel);
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
 

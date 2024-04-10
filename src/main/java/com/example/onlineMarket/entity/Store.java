@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,8 +29,13 @@ public class Store {
     @Column(name = "\"location\"")
     private String location;
 
-    @ManyToMany(mappedBy = "stores", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "\"product_stores\"",
+            inverseJoinColumns = @JoinColumn(name = "\"product_id\"", referencedColumnName = "\"product_id\""),
+            joinColumns = @JoinColumn(name = "\"store_id\"", referencedColumnName = "\"store_id\"")
+    )
     @JsonIgnoreProperties(value = {"stores", "handler", "hibernateLazyInitializer"}, allowSetters = true)
-    private Set<Product> products;
+    private List<Product> products;
 
 }

@@ -1,9 +1,9 @@
 package com.example.onlineMarket.controller;
 
 import com.example.onlineMarket.models.ProductModel;
-import com.example.onlineMarket.services.ProductService;
+import com.example.onlineMarket.models.CreateProductModel;
 import com.example.onlineMarket.entity.Product;
-import lombok.AllArgsConstructor;
+import com.example.onlineMarket.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping("new")
-    public ResponseEntity<Product> createProduct(@RequestBody ProductModel productModel) {
+    public ResponseEntity<Product> createProduct(@RequestBody CreateProductModel productModel) {
         Product savedProduct = productService.createProduct(productModel);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
@@ -33,11 +36,7 @@ public class ProductController {
 
     @PostMapping("update")
     public ResponseEntity<Product> updateBrand(@RequestBody ProductModel productModel) {
-        Product savedProduct = productService.updeteProduct(
-                productModel.getProductId(), productModel.getBrandId(), productModel.getStoresId(),
-                productModel.getName(), productModel.getDescription(), productModel.getPrice(),
-                productModel.getStockQuantity()
-        );
+        Product savedProduct = productService.updateProduct(productModel);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
     

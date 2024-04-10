@@ -1,13 +1,11 @@
 package com.example.onlineMarket.services;
 
-import com.example.onlineMarket.entity.Brand;
 import com.example.onlineMarket.entity.Order;
 import com.example.onlineMarket.entity.User;
 import com.example.onlineMarket.exception.ResourceNotFoundException;
+import com.example.onlineMarket.models.UpdateOrderModel;
 import com.example.onlineMarket.repository.OrderRepository;
 import com.example.onlineMarket.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +13,23 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class OrderService {
 
+
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    static final String resourceNotFoundException = "Orders is not exists with the given id: ";
+
     @Autowired
-    OrderRepository orderRepository;
-    @Autowired
-    UserRepository userRepository;
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+    }
 
     public Order createOrder(Long userId){
 
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new ResourceNotFoundException("Orders is not exists with the given id: " + userId)
+                () -> new ResourceNotFoundException(resourceNotFoundException + userId)
         );
         Order order = new Order(
                 null,
@@ -42,7 +44,7 @@ public class OrderService {
 
     public Order getOrderById(Long orderId) {
         return orderRepository.findById(orderId).orElseThrow(
-                () -> new ResourceNotFoundException("Orders is not exists with the given id: " + orderId)
+                () -> new ResourceNotFoundException(resourceNotFoundException + orderId)
         );
     }
 
@@ -50,25 +52,24 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order deleteOrder(Long orderId){
-        Order order = orderRepository.findById(orderId).orElseThrow(
-                () -> new ResourceNotFoundException("Orders is not exists with the given id: " + orderId)
+    public void deleteOrder(Long orderId){
+        orderRepository.findById(orderId).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + orderId)
         );
         orderRepository.deleteById(orderId);
-        return order;
     }
 
-    public Order updeteOrder(Long userId, Date orderDate, Double totalAmount, String orderStatus, Long orderId) {
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new ResourceNotFoundException("Orders is not exists with the given id: " + userId)
+    public Order updateOrder(UpdateOrderModel newOrder) {
+        User user = userRepository.findById(newOrder.getUser().getUserId()).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + newOrder.getUser().getUserId())
         );
-        Order order = orderRepository.findById(orderId).orElseThrow(
-                () -> new ResourceNotFoundException("Orders is not exists with the given id: " + orderId)
+        Order oldOrder = orderRepository.findById(newOrder.getOrderId()).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + newOrder.getOrderId())
         );
-        order.setUser(user);
-        order.setOrderDate(orderDate);
-        order.setTotalAmount(totalAmount);
-        order.setOrderStatus(orderStatus);
-        return orderRepository.save(order);
+        oldOrder.setUser(user);
+        oldOrder.setOrderDate(newOrder.getOrderDate());
+        oldOrder.setTotalAmount(newOrder.getTotalAmount());
+        oldOrder.setOrderStatus(newOrder.getOrderStatus());
+        return orderRepository.save(oldOrder);
     }
 }

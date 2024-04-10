@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.Set;
 
 @Entity

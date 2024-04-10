@@ -3,7 +3,6 @@ package com.example.onlineMarket.controller;
 import com.example.onlineMarket.entity.OrderItem;
 import com.example.onlineMarket.models.OrderItemModel;
 import com.example.onlineMarket.services.OrderItemService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/orderItems")
 public class OrderItemController {
 
+    private final OrderItemService orderItemService;
+
     @Autowired
-    private OrderItemService orderItemService;
+    public OrderItemController(OrderItemService orderItemService) {
+        this.orderItemService = orderItemService;
+    }
 
     @PostMapping("new")
     public ResponseEntity<OrderItem> createOrderItem(@RequestBody OrderItemModel orderItemModel) {
@@ -33,7 +35,7 @@ public class OrderItemController {
 
     @PostMapping("update")
     public ResponseEntity<OrderItem> updateOrderItem(@RequestBody OrderItem orderItem) {
-        OrderItem savedOrderItem = orderItemService.updeteOrderItem(orderItem);
+        OrderItem savedOrderItem = orderItemService.updateOrderItem(orderItem);
         return new ResponseEntity<>(savedOrderItem, HttpStatus.CREATED);
     }
 

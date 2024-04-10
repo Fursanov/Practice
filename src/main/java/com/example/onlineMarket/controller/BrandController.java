@@ -2,7 +2,6 @@ package com.example.onlineMarket.controller;
 
 import com.example.onlineMarket.entity.Brand;
 import com.example.onlineMarket.services.BrandService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/brands")
 public class BrandController {
 
+    private final BrandService brandService;
+
     @Autowired
-    private BrandService brandService;
+    public BrandController(BrandService brandService) {
+        this.brandService = brandService;
+    }
 
     @PostMapping("new")
     public ResponseEntity<Brand> createBrand(@RequestBody Brand brands) {
@@ -32,7 +34,7 @@ public class BrandController {
 
     @PostMapping("update")
     public ResponseEntity<Brand> updateBrand(@RequestBody Brand brand) {
-        Brand savedBrand = brandService.updeteBrand(brand);
+        Brand savedBrand = brandService.updateBrand(brand);
         return new ResponseEntity<>(savedBrand, HttpStatus.CREATED);
     }
 

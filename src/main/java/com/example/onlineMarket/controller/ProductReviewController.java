@@ -1,10 +1,8 @@
 package com.example.onlineMarket.controller;
 
 import com.example.onlineMarket.entity.ProductReview;
-import com.example.onlineMarket.entity.ProductReview;
 import com.example.onlineMarket.models.ProductReviewModel;
 import com.example.onlineMarket.services.ProductReviewService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/productReviews")
 public class ProductReviewController {
 
+    private final ProductReviewService productReviewService;
+
     @Autowired
-    private ProductReviewService productReviewService;
+    public ProductReviewController(ProductReviewService productReviewService) {
+        this.productReviewService = productReviewService;
+    }
 
     @PostMapping("new")
     public ResponseEntity<ProductReview> createProductReview(@RequestBody ProductReviewModel productReviewModel) {
@@ -34,7 +35,7 @@ public class ProductReviewController {
 
     @PostMapping("update")
     public ResponseEntity<ProductReview> updateProductReview(@RequestBody ProductReview productReview) {
-        ProductReview savedProductReview = productReviewService.updeteProductReview(productReview);
+        ProductReview savedProductReview = productReviewService.updateProductReview(productReview);
         return new ResponseEntity<>(savedProductReview, HttpStatus.CREATED);
     }
 

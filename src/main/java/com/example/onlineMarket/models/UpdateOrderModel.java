@@ -1,7 +1,6 @@
 package com.example.onlineMarket.models;
 
 import com.example.onlineMarket.entity.User;
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.util.Date;
