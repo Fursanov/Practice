@@ -50,12 +50,16 @@ export class UpdateProductComponent implements OnInit {
   onSubmit() {
     if (this.product.name && this.product.description && this.product.price &&
       this.product.stockQuantity) {
-      this.productsService.updateProduct(this.id, this.product).subscribe(
-        data => {
-          this.goToProductsList();
-        },
-        error => console.log(error)
-      );
+      if(this.product.price > 0) {
+        if (this.product.stockQuantity >= 0) {
+          this.productsService.updateProduct(this.id, this.product).subscribe(
+            data => {
+              this.goToProductsList();
+            },
+            error => console.log(error)
+          );
+        } else alert("некорректное значение количества");
+      } else alert("некорректное значение цены");
     } else alert("заполните все поля для отправки");
   }
 }

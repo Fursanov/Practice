@@ -64,12 +64,14 @@ export class UpdateOrderItemComponent implements OnInit {
 
   onSubmit() {
     if (this.orderItem.quantity) {
-      this.orderItemsService.updateOrderItem(this.id, this.orderItem).subscribe(
-        data => {
-          this.goToOrderItemsList();
-        },
-        error => console.log(error)
-      );
+      if(this.orderItem.quantity > 0) {
+        this.orderItemsService.updateOrderItem(this.id, this.orderItem).subscribe(
+          data => {
+            this.goToOrderItemsList();
+          },
+          error => console.log(error)
+        );
+      } else alert("некорректное значение количества");
     } else alert("заполните все поля для отправки");
   }
 

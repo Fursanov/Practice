@@ -64,8 +64,10 @@ export class CreateOrderItemComponent implements OnInit {
 
   onSubmit() {
     if (this.orderItem.quantity && this.orderItem.orderId && this.orderItem.productId) {
-      console.log(this.orderItem);
-      this.saveOrderItem();
+      if(this.orderItem.quantity > 0) {
+        console.log(this.orderItem);
+        this.saveOrderItem();
+      } else alert("некорректное значение количества")
     } else alert("заполните все поля для отправки");
   }
 
