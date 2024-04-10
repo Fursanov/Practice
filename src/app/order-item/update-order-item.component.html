@@ -9,13 +9,13 @@
     <div class="form-group">
       <label for="orderId">Order from</label>
       <select class="form-control select-dropdown" id="orderId" [(ngModel)]="orderItem.order" name="orderId">
-        <option *ngFor="let order of orders" [ngValue]="order">{{order.orderId}}</option>
+        <option *ngFor="let order of orders" [ngValue]="order">{{order.user.userName}} ({{getFormatTime(order.orderDate)}})</option>
       </select>
     </div>
     <div class="form-group">
       <label for="productId">Product</label>
       <select class="form-control select-dropdown" id="productId" [(ngModel)]="orderItem.product" name="productId">
-        <option *ngFor="let product of products" [ngValue]="product">{{product.name}}({{product.brand.brandName}})</option>
+        <option *ngFor="let product of products" [ngValue]="product">{{product.name}} ({{product.brand.brandName}})</option>
       </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>

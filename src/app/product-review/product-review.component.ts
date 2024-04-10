@@ -39,4 +39,11 @@ export class ProductReviewComponent implements OnInit {
       this.getAllProductReview();
     })
   }
+
+  getFormatTime(date: any) {
+    const [datePart, timePart] = date.split('T');
+    const [year, month, day] = datePart.split('-');
+    const [time, timeZone] = timePart.split('.');
+    return `${day}.${month}.${year} ${time}`;
+  }
 }

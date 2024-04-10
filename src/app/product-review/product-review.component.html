@@ -17,7 +17,7 @@
       <tr *ngFor="let productReview of productReviews">
         <td> {{productReview.rating}}</td>
         <td> {{productReview.reviewText}}</td>
-        <td> {{productReview.reviewDate}}</td>
+        <td> {{getFormatTime(productReview.reviewDate)}}</td>
         <td> {{productReview.user.email}}</td>
         <td> {{productReview.product.name}}({{productReview.product.brand.brandName}})</td>
         <td style = "text-align: right;">

@@ -20,7 +20,7 @@
     <div class="form-group">
       <label for="productId">Product</label>
       <select class="form-control select-dropdown" id="productId" [(ngModel)]="productReview.productId" name="productId">
-        <option *ngFor="let product of products" [value]="product.productId"> {{product.name}}({{product.brand.brandName}})</option>
+        <option *ngFor="let product of products" [value]="product.productId"> {{product.name}} ({{product.brand.brandName}})</option>
       </select>
     </div>
     <button class="btn btn-success mt-2" type="submit">Submit</button>

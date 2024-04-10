@@ -66,4 +66,11 @@ export class CreateOrderItemComponent implements OnInit {
     console.log(this.orderItem);
     this.saveOrderItem();
   }
+
+  getFormatTime(date: any) {
+    const [datePart, timePart] = date.split('T');
+    const [year, month, day] = datePart.split('-');
+    const [time, timeZone] = timePart.split('.');
+    return `${day}.${month}.${year} ${time}`;
+  }
 }
