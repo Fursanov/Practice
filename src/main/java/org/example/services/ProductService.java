@@ -36,7 +36,7 @@ public class ProductService {
                 this.products.add(product);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -116,7 +116,7 @@ public class ProductService {
                 System.out.println("Не удалось создать продукт.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -129,7 +129,7 @@ public class ProductService {
                 System.out.println("Продукт успешно удален из магазинов");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
         String sql = "DELETE FROM products WHERE product_id = ?";
         try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
@@ -142,7 +142,7 @@ public class ProductService {
                 System.out.println("Не удалось удалить Продукт");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -191,7 +191,7 @@ public class ProductService {
                 System.out.println("Не удалось обновить запись");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 

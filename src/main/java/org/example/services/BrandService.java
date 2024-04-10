@@ -28,7 +28,7 @@ public class BrandService {
                 this.brands.add(brand);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -70,7 +70,7 @@ public class BrandService {
                 System.out.println("Не удалось создать бренд.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -88,7 +88,7 @@ public class BrandService {
                         System.out.println("Продукт успешно удален из магазинов");
                     }
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    System.out.println("error");
                 }
                 String delProductSql = "DELETE FROM products WHERE product_id = ?";
                 try (PreparedStatement delProductsStatement = this.connection.prepareStatement(delProductSql)) {
@@ -98,11 +98,11 @@ public class BrandService {
                         System.out.println("Продукт успешно удален");
                     }
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    System.out.println("error");
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
         String sql = "DELETE FROM product_brands WHERE brand_id = ?";
         try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
@@ -115,7 +115,7 @@ public class BrandService {
                 System.out.println("Не удалось удалить бренд");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -132,7 +132,7 @@ public class BrandService {
                 System.out.println("Не удалось изменить название бренда");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 

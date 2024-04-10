@@ -1,6 +1,5 @@
 package org.example.services;
 
-import org.example.entity.Product;
 import org.example.entity.Store;
 
 import java.sql.*;
@@ -45,7 +44,7 @@ public class StoreService {
                 this.stores.add(store);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -86,7 +85,7 @@ public class StoreService {
                 System.out.println("Не удалось создать магазин.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -102,7 +101,7 @@ public class StoreService {
                 System.out.println("Не удалось удалить магазин");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -136,7 +135,7 @@ public class StoreService {
                 System.out.println("Не удалось обновить запись");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -179,7 +178,7 @@ public class StoreService {
                 System.out.println("Не удалось добавить продукт.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -234,7 +233,7 @@ public class StoreService {
                 System.out.println("Не удалось удалить продукт из магазина.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 

@@ -106,11 +106,11 @@ public class ProductController {
                                 break;
                             case 3:
                                 System.out.println("Введите новую цену продукта");
-                                Double newPeice = safeDoubleInput(scanner);
+                                Double newPrice = safeDoubleInput(scanner);
                                 this.productService.updateProduct(
                                         this.productService.getProductIdByNumber(updateProduct),
                                         "price",
-                                        newPeice
+                                        newPrice
                                 );
                                 break;
                             case 4:
