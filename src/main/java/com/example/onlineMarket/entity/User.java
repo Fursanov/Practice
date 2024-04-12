@@ -38,7 +38,7 @@ public class User {
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = {"user", "handler", "hibernateLazyInitializer"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "productReviews", "orders", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private Set<ProductReview> productReviews;
 
 }

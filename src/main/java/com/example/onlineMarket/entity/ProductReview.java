@@ -33,12 +33,12 @@ public class ProductReview {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"customer_id\"")
-    @JsonIgnoreProperties(value = {"productReviews", "handler", "hibernateLazyInitializer"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"productReviews", "orders", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"product_id\"")
-    @JsonIgnoreProperties(value = {"productReviews", "handler", "hibernateLazyInitializer"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"productReviews", "orderItems", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private Product product;
 
 }

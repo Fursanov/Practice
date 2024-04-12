@@ -3,6 +3,7 @@ package com.example.onlineMarket.services;
 import com.example.onlineMarket.entity.ProductReview;
 import com.example.onlineMarket.entity.Product;
 import com.example.onlineMarket.entity.User;
+import com.example.onlineMarket.exception.ResourceAlreadyExistException;
 import com.example.onlineMarket.exception.ResourceNotFoundException;
 import com.example.onlineMarket.models.ProductReviewModel;
 import com.example.onlineMarket.repository.ProductRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProductReviewService {
@@ -21,6 +23,7 @@ public class ProductReviewService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     static final String resourceNotFoundException = "ProductReviews is not exists with the given id: ";
+    static final String resourceAlreadyExistException = "Product review for that product already exist: ";
 
     @Autowired
     public ProductReviewService(
@@ -34,23 +37,28 @@ public class ProductReviewService {
     }
 
     public ProductReview createProductReview(ProductReviewModel productReviewModel){
-
         User user = userRepository.findById(productReviewModel.getUserId()).orElseThrow(
                 () -> new ResourceNotFoundException(resourceNotFoundException + productReviewModel.getUserId())
         );
         Product product = productRepository.findById(productReviewModel.getProductId()).orElseThrow(
                 () -> new ResourceNotFoundException(resourceNotFoundException + productReviewModel.getProductId())
         );
-        ProductReview productReview = new ProductReview(
-                null,
-                productReviewModel.getRating(),
-                productReviewModel.getReviewText(),
-                new Date(),
-                user,
-                product
+        if(productReviewRepository.getProductReviewByProductAndUser(product, user) == null) {
+            ProductReview productReview = new ProductReview(
+                    null,
+                    productReviewModel.getRating(),
+                    productReviewModel.getReviewText(),
+                    new Date(),
+                    user,
+                    product
 
-        );
-        return productReviewRepository.save(productReview);
+            );
+            return productReviewRepository.save(productReview);
+        }
+        else
+            throw new ResourceAlreadyExistException(
+                    resourceAlreadyExistException +
+                            product.getName() + " (" + product.getBrand().getBrandName() + ")");
     }
 
     public ProductReview getProductReviewById(Long productReviewId) {
@@ -60,15 +68,30 @@ public class ProductReviewService {
     }
 
     public ProductReview updateProductReview(ProductReview newProductReview) {
-        ProductReview oldProductReview = productReviewRepository.findById(newProductReview.getProductReviewId()).orElseThrow(
-                () -> new ResourceNotFoundException(resourceNotFoundException + newProductReview.getProductReviewId())
+        ProductReview searchProductReview = productReviewRepository.getProductReviewByProductAndUser(
+                newProductReview.getProduct(),
+                newProductReview.getUser()
         );
-        oldProductReview.setRating(newProductReview.getRating());
-        oldProductReview.setReviewText(newProductReview.getReviewText());
-        oldProductReview.setReviewDate(newProductReview.getReviewDate());
-        oldProductReview.setUser(newProductReview.getUser());
-        oldProductReview.setProduct(newProductReview.getProduct());
-        return productReviewRepository.save(oldProductReview);
+        if(searchProductReview == null
+                || Objects.equals(
+                    searchProductReview.getProductReviewId(),
+                    newProductReview.getProductReviewId())
+        ) {
+            ProductReview oldProductReview = productReviewRepository.findById(newProductReview.getProductReviewId()).orElseThrow(
+                    () -> new ResourceNotFoundException(resourceNotFoundException + newProductReview.getProductReviewId())
+            );
+            oldProductReview.setRating(newProductReview.getRating());
+            oldProductReview.setReviewText(newProductReview.getReviewText());
+            oldProductReview.setReviewDate(newProductReview.getReviewDate());
+            oldProductReview.setUser(newProductReview.getUser());
+            oldProductReview.setProduct(newProductReview.getProduct());
+            return productReviewRepository.save(oldProductReview);
+        }
+        else
+            throw new ResourceAlreadyExistException(
+                    resourceAlreadyExistException +
+                            newProductReview.getProduct().getName() + " (" +
+                            newProductReview.getProduct().getBrand().getBrandName() + ")");
     }
 
     public List<ProductReview> getAllProductReviews(){
