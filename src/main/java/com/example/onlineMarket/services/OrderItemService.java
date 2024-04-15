@@ -56,6 +56,7 @@ public class OrderItemService {
     }
 
     public OrderItem updateOrderItem(OrderItem newOrderItem) {
+
         OrderItem oldOrderItem = orderItemRepository.findById(newOrderItem.getOrderItemId()).orElseThrow(
                 () -> new ResourceNotFoundException(resourceNotFoundException + newOrderItem.getOrderItemId())
         );

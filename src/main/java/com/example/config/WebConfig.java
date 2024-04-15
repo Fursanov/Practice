@@ -9,7 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // Применяется ко всем маршрутам, начинающимся с /api
-                .allowedOrigins("http://localhost:4200") // Разрешаем запросы только с этого источника
+                .allowedOrigins("http://localhost:4200", "http://localhost:3000") // Разрешаем запросы только с этого источника
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Разрешенные методы
                 .allowedHeaders("*"); // Разрешенные заголовки
     }

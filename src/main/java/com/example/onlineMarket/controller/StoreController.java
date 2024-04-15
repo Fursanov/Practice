@@ -26,8 +26,14 @@ public class StoreController {
         return new ResponseEntity<>(savedStore, HttpStatus.CREATED);
     }
 
-    @PostMapping("update")
+    @PostMapping("products/update")
     public ResponseEntity<Store> updateStore(@RequestBody Store store) {
+        Store savedStore = storeService.updateStoreProducts(store);
+        return new ResponseEntity<>(savedStore, HttpStatus.CREATED);
+    }
+
+    @PostMapping("update")
+    public ResponseEntity<Store> updateStoreProducts(@RequestBody Store store) {
         Store savedStore = storeService.updateStore(store);
         return new ResponseEntity<>(savedStore, HttpStatus.CREATED);
     }

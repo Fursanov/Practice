@@ -28,6 +28,4 @@ public class Brand {
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"brand", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private Set<Product> products;
-
-
 }

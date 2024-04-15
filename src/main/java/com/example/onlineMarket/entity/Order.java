@@ -40,6 +40,4 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"order", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private Set<OrderItem> orderItems;
-
-
 }

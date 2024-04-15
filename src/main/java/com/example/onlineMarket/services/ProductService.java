@@ -69,9 +69,14 @@ public class ProductService {
     }
 
     public void deleteProduct(Long productId){
-        productRepository.findById(productId).orElseThrow(
+        Product product = productRepository.findById(productId).orElseThrow(
                 () -> new ResourceNotFoundException(resourceNotFoundException + productId)
         );
+        Iterable<Store> stores = storeRepository.findStoresByProductsContaining(product);
+        for (Store store : stores) {
+            store.getProducts().remove(product);
+            storeRepository.save(store);
+        }
         productRepository.deleteById(productId);
     }
 

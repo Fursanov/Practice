@@ -52,12 +52,20 @@ public class StoreService {
                     resourceAlreadyExistException + newStore.getStoreName() + " (" + newStore.getLocation() + ")");
     }
 
+    public Store updateStoreProducts(Store newStore) {
+        Store oldStore = storeRepository.findById(newStore.getStoreId()).orElseThrow(
+                () -> new ResourceNotFoundException(resourceNotFoundException + newStore.getStoreId())
+        );
+        oldStore.setProducts(newStore.getProducts());
+        return storeRepository.save(oldStore);
+      }
+
     public List<Store> getAllStores(){
         return storeRepository.findAll();
     }
 
     public void deleteStore(Long storeId){
-        storeRepository.findById(storeId).orElseThrow(
+        Store store = storeRepository.findById(storeId).orElseThrow(
                 () -> new ResourceNotFoundException(resourceNotFoundException + storeId)
         );
         storeRepository.deleteById(storeId);

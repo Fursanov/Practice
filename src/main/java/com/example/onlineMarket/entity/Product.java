@@ -39,7 +39,7 @@ public class Product {
     @JsonIgnoreProperties(value = {"products", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private Brand brand;
 
-    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products")
     @JsonIgnoreProperties(value = {"products", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private List<Store> stores;
 
@@ -50,4 +50,11 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"product", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private Set<ProductReview> productReviews;
+
+    @PreRemove
+    private void beforeDelete() {
+        for (Store store : stores)
+            store.getProducts().remove(this);
+    }
+
 }
