@@ -6,9 +6,9 @@
 2. [JDBC](https://github.com/Fursanov/Practice/tree/JDBC) - создание консольного приложения (CRUD-операции) с использованием JDBC.
 3. [Backend на SpringBoot + Hibernate](https://github.com/Fursanov/Practice/tree/Backend) 
 4. [Angular - Frontend](https://github.com/Fursanov/Practice/tree/Frontend-angular)
-5. React - Frontend
+5. [React - Frontend](https://github.com/Fursanov/Practice/tree/frontend-react)
 
-|   Таска    | DB | JDBC | Backend | Angular |  React   |
-|:----------:|:--:|:----:|:-------:|:-------:|:--------:|
-|  Ожидание  | 4  |  6   |   18    |   12    |          |
-| Реальность | 4  |  15  |   40    |   20    |          |
+|   Таска    | DB | JDBC | Backend | Angular | React |
+|:----------:|:--:|:----:|:-------:|:-------:|:-----:|
+|  Ожидание  | 4  |  6   |   18    |   12    |  12   |
+| Реальность | 4  |  15  |   40    |   20    |  12   |
