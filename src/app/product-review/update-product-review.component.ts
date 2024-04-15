@@ -64,12 +64,13 @@ export class UpdateProductReviewComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.productReviewService.updateProductReview(this.id, this.productReview).subscribe(
-      data => {
-        this.goToProductReviewList();
-      },
-      error => console.log(error)
-    );
+    if (this.productReview.rating && this.productReview.reviewText) {
+      this.productReviewService.updateProductReview(this.id, this.productReview).subscribe(
+        data => {
+          this.goToProductReviewList();
+        },
+        error => console.log(error)
+      );
+    } else alert("заполните все поля для отправки");
   }
 }

@@ -5,10 +5,22 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Order Date</th>
-        <th>Total Amount</th>
-        <th>Order Status</th>
-        <th>User</th>
+        <th (click)="sortBy('orderDate')"
+            [class.active-sort]="sortByField === 'orderDate' && reverse === false"
+            [class.reverse-sort]="sortByField === 'orderDate' && reverse === true"
+            class="sortable-header">Order Date</th>
+        <th (click)="sortBy('totalAmount')"
+            [class.active-sort]="sortByField === 'totalAmount' && reverse === false"
+            [class.reverse-sort]="sortByField === 'totalAmount' && reverse === true"
+            class="sortable-header">Total Amount</th>
+        <th (click)="sortBy('orderStatus')"
+            [class.active-sort]="sortByField === 'orderStatus' && reverse === false"
+            [class.reverse-sort]="sortByField === 'orderStatus' && reverse === true"
+            class="sortable-header">Order Status</th>
+        <th (click)="sortBy('user')"
+            [class.active-sort]="sortByField === 'user' && reverse === false"
+            [class.reverse-sort]="sortByField === 'user' && reverse === true"
+            class="sortable-header">User</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>

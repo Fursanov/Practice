@@ -63,13 +63,14 @@ export class UpdateOrderItemComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.orderItemsService.updateOrderItem(this.id, this.orderItem).subscribe(
-      data => {
-        this.goToOrderItemsList();
-      },
-      error => console.log(error)
-    );
+    if (this.orderItem.quantity) {
+      this.orderItemsService.updateOrderItem(this.id, this.orderItem).subscribe(
+        data => {
+          this.goToOrderItemsList();
+        },
+        error => console.log(error)
+      );
+    } else alert("заполните все поля для отправки");
   }
 
   getFormatTime(date: any) {

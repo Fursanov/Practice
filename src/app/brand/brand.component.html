@@ -5,7 +5,10 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
+        <th (click)="sortBy('brandName')"
+            [class.active-sort]="sortByField === 'brandName' && reverse === false"
+            [class.reverse-sort]="sortByField === 'brandName' && reverse === true"
+            class="sortable-header">Name</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>

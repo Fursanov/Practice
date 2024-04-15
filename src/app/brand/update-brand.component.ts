@@ -31,11 +31,13 @@ export class UpdateBrandComponent implements OnInit {
   }
 
   onSubmit() {
-    this.brandsService.updateBrand(this.id, this.brand).subscribe(
-      data => {
-        this.goToBrandsList();
-      },
-      error => console.log(error)
-    );
+    if (this.brand.brandName) {
+      this.brandsService.updateBrand(this.id, this.brand).subscribe(
+        data => {
+          this.goToBrandsList();
+        },
+        error => console.log(error)
+      );
+    } else alert("заполните все поля для отправки");
   }
 }

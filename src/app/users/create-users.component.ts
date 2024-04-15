@@ -19,7 +19,6 @@ export class CreateUsersComponent implements OnInit {
   saveUser() {
     this.usersService.createUser(this.user).subscribe(
       data => {
-        console.log(data);
         this.goToUsersList();
       },
       error => console.log(error)
@@ -31,7 +30,11 @@ export class CreateUsersComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.user);
-    this.saveUser();
+    if(this.user.userName && this.user.email &&
+        this.user.role && this.user.passwordHash) {
+      console.log(this.user);
+      this.saveUser();
+    }
+    else alert("заполните все поля для отправки");
   }
 }

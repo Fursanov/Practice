@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
+  sortByField!: keyof User;
+  reverse!: boolean;
 
   constructor(private usersService: UsersService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.sortByField = 'userName';
+    this.reverse = false;
     this.getAllUsers();
   }
 
@@ -38,5 +42,24 @@ export class UsersComponent implements OnInit {
       console.log(data);
       this.getAllUsers();
     })
+  }
+
+  sortBy(field: keyof User) {
+    if (this.sortByField === field) {
+      this.reverse = !this.reverse;
+      this.users.reverse();
+    } else {
+      this.reverse = false;
+      this.sortByField = field;
+      this.users.sort((a, b) => {
+        if (a[field] < b[field]) {
+          return -1;
+        } else if (a[field] > b[field]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 }

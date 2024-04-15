@@ -12,9 +12,11 @@ export class CreateStoreComponent implements OnInit {
   store: Store = new Store();
 
   constructor(private storesService: StoresService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   saveStore() {
     this.storesService.createStore(this.store).subscribe(
@@ -31,7 +33,9 @@ export class CreateStoreComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.store);
-    this.saveStore();
+    if (this.store.storeName && this.store.location) {
+      console.log(this.store);
+      this.saveStore();
+    } else alert("заполните все поля для отправки");
   }
 }

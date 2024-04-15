@@ -48,12 +48,14 @@ export class UpdateProductComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.productsService.updateProduct(this.id, this.product).subscribe(
-      data => {
-        this.goToProductsList();
-      },
-      error => console.log(error)
-    );
+    if (this.product.name && this.product.description && this.product.price &&
+      this.product.stockQuantity) {
+      this.productsService.updateProduct(this.id, this.product).subscribe(
+        data => {
+          this.goToProductsList();
+        },
+        error => console.log(error)
+      );
+    } else alert("заполните все поля для отправки");
   }
 }

@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  sortByField!: keyof Product;
+  reverse!: boolean;
 
   constructor(private productsService: ProductsService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.sortByField = 'name';
+    this.reverse = false;
     this.getAllProducts();
   }
 
@@ -35,9 +39,29 @@ export class ProductComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
+    
     this.productsService.deleteProduct(id).subscribe(data => {
       console.log(data);
       this.getAllProducts();
     })
+  }
+
+  sortBy(field: keyof Product) {
+    if (this.sortByField === field) {
+      this.reverse = !this.reverse;
+      this.products.reverse();
+    } else {
+      this.reverse = false;
+      this.sortByField = field;
+      this.products.sort((a, b) => {
+        if (a[field] < b[field]) {
+          return -1;
+        } else if (a[field] > b[field]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 }

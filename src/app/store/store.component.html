@@ -5,8 +5,14 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Location</th>
+        <th (click)="sortBy('storeName')"
+            [class.active-sort]="sortByField === 'storeName' && reverse === false"
+            [class.reverse-sort]="sortByField === 'storeName' && reverse === true"
+            class="sortable-header">Name</th>
+        <th (click)="sortBy('location')"
+            [class.active-sort]="sortByField === 'location' && reverse === false"
+            [class.reverse-sort]="sortByField === 'location' && reverse === true"
+            class="sortable-header">Location</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>

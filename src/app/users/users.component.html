@@ -5,10 +5,22 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Password hash</th>
-        <th>Role</th>
+        <th (click)="sortBy('userName')"
+            [class.active-sort]="sortByField === 'userName' && reverse === false"
+            [class.reverse-sort]="sortByField === 'userName' && reverse === true"
+            class="sortable-header"> Name </th>
+        <th (click)="sortBy('email')"
+            [class.active-sort]="sortByField === 'email' && reverse === false"
+            [class.reverse-sort]="sortByField === 'email' && reverse === true"
+            class="sortable-header"> Email </th>
+        <th (click)="sortBy('passwordHash')"
+            [class.active-sort]="sortByField === 'passwordHash' && reverse === false"
+            [class.reverse-sort]="sortByField === 'passwordHash' && reverse === true"
+            class="sortable-header"> Password hash  </th>
+        <th (click)="sortBy('role')"
+            [class.active-sort]="sortByField === 'role' && reverse === false"
+            [class.reverse-sort]="sortByField === 'role' && reverse === true"
+            class="sortable-header"> Role  </th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>

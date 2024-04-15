@@ -46,7 +46,10 @@ export class CreateProductComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.product);
-    this.saveProduct();
+    if (this.product.name && this.product.description && this.product.price &&
+      this.product.stockQuantity && this.product.brandId) {
+      console.log(this.product);
+      this.saveProduct();
+    } else alert("заполните все поля для отправки");
   }
 }

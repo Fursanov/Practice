@@ -47,7 +47,9 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.order);
-    this.saveOrder();
+    if (this.order.userId) {
+      console.log(this.order);
+      this.saveOrder();
+    } else alert("заполните все поля для отправки");
   }
 }

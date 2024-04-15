@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {UsersComponent} from "./users/users.component";
 import {UpdateUserComponent} from "./users/update-users.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {CreateUsersComponent} from "./users/create-users.component";
 import { BrandComponent } from './brand/brand.component';
@@ -27,6 +27,7 @@ import { ProductReviewComponent } from './product-review/product-review.componen
 import { UpdateProductReviewComponent } from './product-review/update-product-review.component';
 import { CreateProductReviewComponent } from './product-review/create-product-review.component';
 import { ProductStoreComponent } from './store/product-store.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
 @NgModule({
@@ -61,7 +62,13 @@ import { ProductStoreComponent } from './store/product-store.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

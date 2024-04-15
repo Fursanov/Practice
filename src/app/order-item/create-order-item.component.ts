@@ -15,7 +15,7 @@ export class CreateOrderItemComponent implements OnInit {
   ordersId!: string;
   orders: any[] = [];
   products: any[] =[];
-  
+
   constructor(private orderItemsService: OrderItemsService,
               private orderService: OrdersService,
               private productService: ProductsService,
@@ -63,8 +63,10 @@ export class CreateOrderItemComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.orderItem);
-    this.saveOrderItem();
+    if (this.orderItem.quantity && this.orderItem.orderId && this.orderItem.productId) {
+      console.log(this.orderItem);
+      this.saveOrderItem();
+    } else alert("заполните все поля для отправки");
   }
 
   getFormatTime(date: any) {

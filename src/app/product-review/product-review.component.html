@@ -1,15 +1,30 @@
 <!-- products.component.html -->
 <h2> Product Review List
-  <button (click)="createProductReview()" class="btn btn-success btn-md" style="margin-right: 10px">Create New Order Item</button>
+  <button (click)="createProductReview()" class="btn btn-success btn-md" style="margin-right: 10px">Create New Review</button>
 </h2>
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Rating</th>
-        <th>Review Text</th>
-        <th>Review Date</th>
-        <th>User </th>
-        <th>Product Name</th>
+        <th (click)="sortBy('rating')"
+            [class.active-sort]="sortByField === 'rating' && reverse === false"
+            [class.reverse-sort]="sortByField === 'rating' && reverse === true"
+            class="sortable-header">Rating</th>
+        <th (click)="sortBy('reviewText')"
+            [class.active-sort]="sortByField === 'reviewText' && reverse === false"
+            [class.reverse-sort]="sortByField === 'reviewText' && reverse === true"
+            class="sortable-header">Review Text</th>
+        <th (click)="sortBy('reviewDate')"
+            [class.active-sort]="sortByField === 'reviewDate' && reverse === false"
+            [class.reverse-sort]="sortByField === 'reviewDate' && reverse === true"
+            class="sortable-header">Review Date</th>
+        <th (click)="sortBy('user')"
+            [class.active-sort]="sortByField === 'user' && reverse === false"
+            [class.reverse-sort]="sortByField === 'user' && reverse === true"
+            class="sortable-header">User </th>
+        <th (click)="sortBy('product')"
+            [class.active-sort]="sortByField === 'product' && reverse === false"
+            [class.reverse-sort]="sortByField === 'product' && reverse === true"
+            class="sortable-header">Product Name</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
@@ -19,7 +34,7 @@
         <td> {{productReview.reviewText}}</td>
         <td> {{getFormatTime(productReview.reviewDate)}}</td>
         <td> {{productReview.user.email}}</td>
-        <td> {{productReview.product.name}}({{productReview.product.brand.brandName}})</td>
+        <td> {{productReview.product.name}} ({{productReview.product.brand.brandName}})</td>
         <td style = "text-align: right;">
           <button (click)="updateProductReview(productReview.productReviewId)" class="btn btn-info btn-md" style="margin-left: 5px">Update</button>
           <button (click)="deleteProductReview(productReview.productReviewId)" class="btn btn-danger btn-md" style="margin-left: 5px">Delete</button>

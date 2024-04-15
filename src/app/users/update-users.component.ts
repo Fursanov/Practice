@@ -12,9 +12,10 @@ export class UpdateUserComponent implements OnInit {
   user: User = new User();
   id!: number;
 
-  constructor(private usersService: UsersService, 
+  constructor(private usersService: UsersService,
               private route: ActivatedRoute,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
@@ -31,11 +32,14 @@ export class UpdateUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.usersService.updateUser(this.id, this.user).subscribe(
-      data => {
-        this.goToUsersList();
-      },
-      error => console.log(error)
-    );
+    if (this.user.userName && this.user.email &&
+      this.user.role && this.user.passwordHash) {
+      this.usersService.updateUser(this.id, this.user).subscribe(
+        data => {
+          this.goToUsersList();
+        },
+        error => console.log(error)
+      );
+    } else alert("заполните все поля для отправки");
   }
 }

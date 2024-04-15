@@ -63,7 +63,10 @@ export class CreateProductReviewComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.productReview);
-    this.saveProductreview();
+    if (this.productReview.rating && this.productReview.reviewText &&
+      this.productReview.userId && this.productReview.productId) {
+      console.log(this.productReview);
+      this.saveProductreview();
+    } else alert("заполните все поля для отправки");
   }
 }

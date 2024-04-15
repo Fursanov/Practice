@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
   orders: Order[] = [];
+  sortByField!: keyof Order;
+  reverse!: boolean;
 
   constructor(private ordersService: OrdersService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.sortByField = 'orderDate';
+    this.reverse = false;
     this.getAllOrders();
   }
 
@@ -45,5 +49,24 @@ export class OrderComponent implements OnInit {
     const [year, month, day] = datePart.split('-');
     const [time, timeZone] = timePart.split('.');
     return `${day}.${month}.${year} ${time}`;
+  }
+
+  sortBy(field: keyof Order) {
+    if (this.sortByField === field) {
+      this.reverse = !this.reverse;
+      this.orders.reverse();
+    } else {
+      this.reverse = false;
+      this.sortByField = field;
+      this.orders.sort((a, b) => {
+        if (a[field] < b[field]) {
+          return -1;
+        } else if (a[field] > b[field]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 }

@@ -26,7 +26,7 @@ export class StoresService {
 
   updateStore(id: number, store: Store): Observable<Object>{
     store.storeId = id;
-    return this.httpClient.post(`${this.baseUrl}/update`, store);
+    return this.httpClient.post(`${this.baseUrl}/products/update`, store);
   }
 
   deleteStore(id: number): Observable<Object>{

@@ -11,11 +11,15 @@ import {ProductReview} from "../models/product-review";
 })
 export class ProductReviewComponent implements OnInit {
   productReviews: ProductReview[] = [];
+  sortByField!: keyof ProductReview;
+  reverse!: boolean;
 
   constructor(private productReviewService: ProductReviewService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.sortByField = 'rating';
+    this.reverse = false;
     this.getAllProductReview();
   }
 
@@ -45,5 +49,24 @@ export class ProductReviewComponent implements OnInit {
     const [year, month, day] = datePart.split('-');
     const [time, timeZone] = timePart.split('.');
     return `${day}.${month}.${year} ${time}`;
+  }
+
+  sortBy(field: keyof ProductReview) {
+    if (this.sortByField === field) {
+      this.reverse = !this.reverse;
+      this.productReviews.reverse();
+    } else {
+      this.reverse = false;
+      this.sortByField = field;
+      this.productReviews.sort((a, b) => {
+        if (a[field] < b[field]) {
+          return -1;
+        } else if (a[field] > b[field]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 }

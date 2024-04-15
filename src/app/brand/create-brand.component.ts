@@ -31,7 +31,9 @@ export class CreateBrandComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.brand);
-    this.saveBrand();
+    if (this.brand.brandName) {
+      console.log(this.brand);
+      this.saveBrand();
+    } else alert("заполните все поля для отправки");
   }
 }

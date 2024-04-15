@@ -7,6 +7,33 @@ h2 {
   color: #333;
 }
 
+.sort-icon {
+  margin-left: 5px;
+  font-size: 10px;
+}
+
+.sortable-header {
+  cursor: pointer;
+}
+
+.sortable-header.active {
+  font-weight: bold; /* Выделение выбранной сортировки */
+}
+
+.sortable-header:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+.active-sort::after {
+  content: '↓'; /* Символ стрелки или другого индикатора активной сортировки */
+  font-weight: bold;
+}
+
+.reverse-sort::after {
+  content: '↑'; /* Символ стрелки или другого индикатора активной сортировки */
+  font-weight: bold;
+}
+
 /* Выравнивание записей в таблице по заголовкам колонок */
 table tbody tr td {
   text-align: center; /* Выравнивание текста в ячейках таблицы по левому краю */

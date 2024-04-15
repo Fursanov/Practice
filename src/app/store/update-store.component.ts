@@ -31,11 +31,13 @@ export class UpdateStoreComponent implements OnInit {
   }
 
   onSubmit() {
-    this.storesService.updateStore(this.id, this.store).subscribe(
-      data => {
-        this.goToStoresList();
-      },
-      error => console.log(error)
-    );
+    if (this.store.storeName && this.store.location) {
+      this.storesService.updateStore(this.id, this.store).subscribe(
+        data => {
+          this.goToStoresList();
+        },
+        error => console.log(error)
+      );
+    } else alert("заполните все поля для отправки");
   }
 }

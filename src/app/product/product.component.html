@@ -5,11 +5,26 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Product Name</th>
-        <th>Product Description</th>
-        <th>Price</th>
-        <th>Stock Quantity</th>
-        <th>Brand</th>
+        <th (click)="sortBy('name')"
+            [class.active-sort]="sortByField === 'name' && reverse === false"
+            [class.reverse-sort]="sortByField === 'name' && reverse === true"
+            class="sortable-header">Product Name</th>
+        <th (click)="sortBy('description')"
+            [class.active-sort]="sortByField === 'description' && reverse === false"
+            [class.reverse-sort]="sortByField === 'description' && reverse === true"
+            class="sortable-header">Product Description</th>
+        <th (click)="sortBy('price')"
+            [class.active-sort]="sortByField === 'price' && reverse === false"
+            [class.reverse-sort]="sortByField === 'price' && reverse === true"
+            class="sortable-header">Price</th>
+        <th (click)="sortBy('stockQuantity')"
+            [class.active-sort]="sortByField === 'stockQuantity' && reverse === false"
+            [class.reverse-sort]="sortByField === 'stockQuantity' && reverse === true"
+            class="sortable-header">Stock Quantity</th>
+        <th (click)="sortBy('brand')"
+            [class.active-sort]="sortByField === 'brand' && reverse === false"
+            [class.reverse-sort]="sortByField === 'brand' && reverse === true"
+            class="sortable-header">Brand</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>

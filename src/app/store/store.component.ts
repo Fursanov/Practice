@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class StoreComponent implements OnInit {
   stores: Store[] = [];
+  sortByField!: keyof Store;
+  reverse!: boolean;
 
   constructor(private storesService: StoresService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.sortByField = 'storeName';
+    this.reverse = false;
     this.getAllStores();
   }
 
@@ -42,5 +46,24 @@ export class StoreComponent implements OnInit {
       console.log(data);
       this.getAllStores();
     })
+  }
+
+  sortBy(field: keyof Store) {
+    if (this.sortByField === field) {
+      this.reverse = !this.reverse;
+      this.stores.reverse();
+    } else {
+      this.reverse = false;
+      this.sortByField = field;
+      this.stores.sort((a, b) => {
+        if (a[field] < b[field]) {
+          return -1;
+        } else if (a[field] > b[field]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 }

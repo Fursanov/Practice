@@ -5,9 +5,18 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Quantity</th>
-        <th>Order from</th>
-        <th>Product Name</th>
+        <th (click)="sortBy('quantity')"
+            [class.active-sort]="sortByField === 'quantity' && reverse === false"
+            [class.reverse-sort]="sortByField === 'quantity' && reverse === true"
+            class="sortable-header">Quantity</th>
+        <th (click)="sortBy('order')"
+            [class.active-sort]="sortByField === 'order' && reverse === false"
+            [class.reverse-sort]="sortByField === 'order' && reverse === true"
+            class="sortable-header">Order from</th>
+        <th (click)="sortBy('product')"
+            [class.active-sort]="sortByField === 'product' && reverse === false"
+            [class.reverse-sort]="sortByField === 'product' && reverse === true"
+            class="sortable-header">Product Name</th>
         <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
