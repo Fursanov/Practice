@@ -1,0 +1,42 @@
+
+.container {
+    max-width: 800px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера по горизонтали */
+    padding: 40px 20px; /* Внутренний отступ контейнера */
+}
+
+h1 {
+    font-size: 32px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    margin-bottom: 30px; /* Нижний отступ */
+}
+
+
+ul {
+    list-style: none; /* Убираем маркеры у списка */
+    padding: 0; /* Убираем внутренний отступ */
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+img {
+    display: block; 
+    max-width: 100%; 
+    height: auto; 
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
